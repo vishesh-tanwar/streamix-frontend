@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
-import '../assets/icons.dart'; 
+import '../assets/icons.dart';
 
 // ignore: must_be_immutable
-class MyDrawer extends StatelessWidget { 
+class MyDrawer extends StatelessWidget {
   MyDrawer({Key? key}) : super(key: key);
 
   Map<String, dynamic> beforeLine = {
@@ -29,26 +28,24 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Container(
       width: 250,
-      backgroundColor: Colors.black,
-      child: ListView(
-        padding: EdgeInsets.zero,
+      color: Colors.black,
+      child: Column(
         children: [
-          // Header Section
-          Padding( 
-            padding: EdgeInsets.all(8.0),
-            
+          // Header Section (Static)
+          Padding(
+            padding: EdgeInsets.fromLTRB(6.0, 18.0, 6.0, 3.0),
             child: SizedBox(
               height: 100,
-              child: Row( 
+              child: Row(
                 children: [
                   Image.asset(
-                    youtubeLogoImage, 
+                    youtubeLogoImage,
                     height: 42,
                   ),
                   const SizedBox(
-                    width: 8,
+                    width: 1,
                   ),
                   const Text(
                     "Youtube",
@@ -59,64 +56,74 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
 
-          // Before line section
-          ...beforeLine.entries.map((entry) {
-            return ListTile(
-              leading: Icon(
-                entry.value,
-                color: Colors.white,
-              ),
-              title: Text(
-                entry.key,
-                style: TextStyle(color: Colors.white),
-              ),
-              onTap: () {
-                Navigator.pop(context);  // Close the drawer
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("${entry.key} tapped")),
-                );
-              },
-            );
-          }),
-
-          // Divider after before line
-          Divider(
-            color: Colors.white,
-            thickness: 1,
-          ),
-
-          // After line section
-          ...afterLine.entries.map((entry) {
-            return ListTile(
-              leading: entry.value is String
-                  ? Image.asset(
+          // Scrollable Section
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                // Before line section
+                ...beforeLine.entries.map((entry) {
+                  return ListTile(
+                    leading: Icon(
                       entry.value,
-                      height: 30,
-                    )
-                  : Icon(
-                      entry.value,
-                      color: const Color.fromARGB(255, 255, 0, 0),
+                      color: Colors.white,
                     ),
-              title: Text(
-                entry.key,
-                style: TextStyle(color: Colors.white),
-              ),
-              onTap: () {
-                Navigator.pop(context);  // Close the drawer
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("${entry.key} tapped")),
-                );
-              },
-            );
-          }),
+                    title: Text(
+                      entry.key,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context); // Close the drawer
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("${entry.key} tapped")),
+                      );
+                    },
+                  );
+                }),
 
-          Center(
-            child: Text(
-              "Privacy Policy ~ Terms of Service",
-              style: TextStyle(color: Colors.grey, fontSize: 12),
+                // Divider after before line
+                Divider(
+                  color: Colors.white,
+                  thickness: 1,
+                ),
+
+                // After line section
+                ...afterLine.entries.map((entry) {
+                  return ListTile(
+                    leading: entry.value is String
+                        ? Padding(
+                            padding: EdgeInsets.only(left: 0.0),
+                            child: Image.asset(
+                              entry.value,
+                              height: 30,
+                            ),
+                          )
+                        : Icon(
+                            entry.value,
+                            color: const Color.fromARGB(255, 255, 0, 0),
+                          ),
+                    title: Text(
+                      entry.key,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context); // Close the drawer
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("${entry.key} tapped")),
+                      );
+                    },
+                  );
+                }),
+                Center(
+                  child: Text(
+                    "Privacy Policy ~ Terms of Service",
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                ),
+                SizedBox(height: 10),
+              ],
             ),
           ),
-          SizedBox(height: 10)
         ],
       ),
     );

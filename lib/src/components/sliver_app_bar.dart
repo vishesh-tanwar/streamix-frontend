@@ -47,7 +47,7 @@ class CustomSliverAppBar extends StatelessWidget {
             );
           },
         ),
-      ],
+      ], 
       pinned: false,
       floating: true,
       expandedHeight: 100,
@@ -55,7 +55,7 @@ class CustomSliverAppBar extends StatelessWidget {
         background: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 85), // Space for the title bar
+            const SizedBox(height: 48), 
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
