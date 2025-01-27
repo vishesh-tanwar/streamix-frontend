@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/utils/scale.dart';
 import '../models/reels.dart';
 
 class ReelCard extends StatelessWidget {
@@ -12,16 +13,15 @@ class ReelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160,
+      width: Scale.screenWidth * 0.47, 
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 0, 0, 0),
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: const EdgeInsets.all(1),
+      // padding: const EdgeInsets.only(top:1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Stack to layer title on top of the image
           Stack(
             children: [
               // Image
@@ -29,31 +29,30 @@ class ReelCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   reels.thumbnail,
-                  width: 160,
-                  height: 250,
+                  width: Scale.screenWidth * 0.46, 
+                  height: Scale.screenHeight * 0.323,
                   fit: BoxFit.cover,
                 ),
               ),
-              // Title on top of image
               Positioned(
-                bottom: 6, // Position title towards the bottom
-                left: 10, // Position title towards the left
-                right: 10, // Allow title to stretch
+                bottom: 6,
+                left: 10, 
+                right: 10, 
                 child: Text(
-                  reels.title, // The title from your Reels model
+                  reels.title, 
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
-                    backgroundColor: Color.fromARGB(0, 0, 0, 0), // Optional background for better readability
+                    backgroundColor: Color.fromARGB(0, 0, 0, 0), 
                   ),
-                  maxLines: 2, // Limit title to 2 lines
-                  overflow: TextOverflow.ellipsis, // Add ellipsis for overflow text
+                  maxLines: 2, 
+                  overflow: TextOverflow.ellipsis, 
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 3),
+          SizedBox(height: Scale.screenHeight * 0.007),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/utils/scale.dart';
 import 'package:project/src/widgets/reel_card.dart';
 import '../components/sliver_app_bar.dart';
 import '../components/bottom_bar.dart';
@@ -6,27 +7,34 @@ import '../components/drawer.dart';
 import '../widgets/video_card.dart';
 import '../models/video.dart';
 import '../models/reels.dart';
-import '../widgets/short_header.dart'; // Import the ShortsHeader widget
+import '../widgets/short_header.dart'; 
+import '../assets/strings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   var category = [
-    "All",
-    "Gaming",
-    "Music",
-    "Flutter",
-    "Bosses",
-    "Arcade games"
+    Strings.all,
+    Strings.gaming,
+    Strings.music,
+    Strings.flutter,
+    Strings.bosses,
+    Strings.arcade
   ];
 
   void openDrawer(BuildContext context) {
     Scaffold.of(context).openDrawer();
+  }
+  @override
+  void initState() {
+    Scale.initialize();
+    super.initState();
   }
 
   @override
@@ -44,29 +52,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     categories: category,
                     onDrawerTap: () => openDrawer(scaffoldContext),
                   ),
+                  
                   SliverToBoxAdapter(
                     child: Container(
                       color: Colors.black,
                       child: Column(
                         children: [
-                          const ShortsHeader(), // Use the custom widget here
+                          const ShortsHeader(),
+                          SizedBox(height: Scale.screenHeight * 0.014,), 
                           Wrap(
-                            spacing: 10,
-                            runSpacing: 10,
-                            children: reelData.map((reel) {
-                              return ReelCard(
-                                reels: reel,
-                              );
-                            }).toList(),
+                            spacing: 6,
+                            runSpacing: 6,
+                            children: [ 
+                              // for (var reel in reelData)
+                              //   ReelCard(
+                              //     reels: reel,
+                              //   ),
+                              ...List.generate(reelData.length,(i)=>ReelCard(reels: reelData[i])),
+                            ],
                           ),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: homeData.map((video) {
-                              return VideoCard(
-                                  video: video); // Use the custom widget
-                            }).toList(),
-                          ),
+                          ...List.generate(homeData.length,(i)=>VideoCard(video: homeData[i])),
                         ],
                       ),
                     ),
@@ -77,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomBar(),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }

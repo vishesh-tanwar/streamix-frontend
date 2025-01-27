@@ -1,54 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/utils/scale.dart';
 import '../assets/icons.dart';
+import '../assets/strings.dart';
 
 // ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
   MyDrawer({Key? key}) : super(key: key);
 
-  Map<String, dynamic> beforeLine = {
-    "Trending": trendingIcon,
-    "Shopping": shoppingIcon,
-    "Music": musicIcon,
-    "Films": filmIcon,
-    "Live": liveIcon,
-    "Gaming": gamingIcon,
-    "News": newsIcon,
-    "Sport": sportIcon,
-    "Courses": coursesIcon,
-    "Fashion & beauty": fashionIcon,
-    "Podcasts": podcastsIcon,
-  };
+  final List<String> titles = [
+    Strings.trending,
+    Strings.shopping,
+    Strings.music,
+    Strings.films,
+    Strings.live,
+    Strings.gaming,
+    Strings.news,
+    Strings.sport,
+    Strings.courses,
+    Strings.fashionAndBeauty,
+    Strings.podcasts,
+    "divider", // Divider marker
+    Strings.youtubePremium,
+    Strings.youtubeStudio,
+    Strings.youtubeMusic,
+    Strings.youtubeKids,
+  ];
 
-  Map<String, dynamic> afterLine = {
-    "Youtube Premium": youtubeLogoImage,
-    "Youtube Studio": youtubeStudioIcon,
-    "Youtube Music": youtubeMusicIcon,
-    "Youtube Kids": youtubeKidsIcon,
-  };
+  final List<dynamic> icons = [
+    AppIcons.trendingIcon,
+    AppIcons.shoppingIcon,
+    AppIcons.musicIcon,
+    AppIcons.filmIcon,
+    AppIcons.liveIcon,
+    AppIcons.gamingIcon,
+    AppIcons.newsIcon,
+    AppIcons.sportIcon,
+    AppIcons.coursesIcon,
+    AppIcons.fashionIcon,
+    AppIcons.podcastsIcon,
+    true, // Divider marker
+    AppIcons.youtubeLogoImage,
+    AppIcons.youtubeStudioIcon,
+    AppIcons.youtubeMusicIcon,
+    AppIcons.youtubeKidsIcon,
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250,
+      width: Scale.screenWidth * 0.64,
       color: Colors.black,
       child: Column(
         children: [
-          // Header Section (Static)
+          // Header Section
           Padding(
-            padding: EdgeInsets.fromLTRB(6.0, 18.0, 6.0, 3.0),
+            padding: const EdgeInsets.fromLTRB(6.0, 18.0, 6.0, 3.0),
             child: SizedBox(
-              height: 100,
+              height: Scale.screenHeight * 0.09,
               child: Row(
                 children: [
                   Image.asset(
-                    youtubeLogoImage,
-                    height: 42,
+                    AppIcons.youtubeLogoImage,
+                    height: Scale.screenHeight * 0.05,
                   ),
-                  const SizedBox(
-                    width: 1,
-                  ),
+                  SizedBox(width: Scale.screenHeight * 0.0001),
                   const Text(
-                    "Youtube",
+                    Strings.youtube,
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
@@ -56,72 +73,64 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
 
-          // Scrollable Section
           Expanded(
-            child: ListView(
+            child: ListView.builder(
               padding: EdgeInsets.zero,
-              children: [
-                // Before line section
-                ...beforeLine.entries.map((entry) {
-                  return ListTile(
-                    leading: Icon(
-                      entry.value,
-                      color: Colors.white,
+              itemCount: titles.length + 1,
+              itemBuilder: (context, index) {
+                if (index == titles.length) {
+                  // Footer Section
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Text(
+                        Strings.privacyPolicyTerms,
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 12),
+                      ),
                     ),
-                    title: Text(
-                      entry.key,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context); // Close the drawer
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("${entry.key} tapped")),
-                      );
-                    },
                   );
-                }),
+                }
 
-                // Divider after before line
-                Divider(
-                  color: Colors.white,
-                  thickness: 1,
-                ),
-
-                // After line section
-                ...afterLine.entries.map((entry) {
-                  return ListTile(
-                    leading: entry.value is String
-                        ? Padding(
-                            padding: EdgeInsets.only(left: 0.0),
-                            child: Image.asset(
-                              entry.value,
-                              height: 30,
-                            ),
-                          )
-                        : Icon(
-                            entry.value,
-                            color: const Color.fromARGB(255, 255, 0, 0),
-                          ),
-                    title: Text(
-                      entry.key,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context); // Close the drawer
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("${entry.key} tapped")),
-                      );
-                    },
+                // Handle divider
+                if (titles[index] == "divider") {
+                  return const Divider(
+                    color: Color.fromARGB(255, 44, 44, 44),
+                    thickness: 2,
                   );
-                }),
-                Center(
-                  child: Text(
-                    "Privacy Policy ~ Terms of Service",
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                }
+
+                // Handle list tiles
+                return ListTile(
+                  leading: icons[index] is IconData
+                      ? Icon(
+                          icons[index],
+                          color: index > 11
+                              ? Colors.red // Icon color red for indices > 11
+                              : Colors.white,
+                        )
+                      : icons[index] is String
+                          ? Transform.translate(
+                              offset: const Offset(
+                                  -6.6, 0.0), // Move left by 10 pixels
+                              child: Image.asset(
+                                icons[index],
+                                height: Scale.screenHeight * 0.034,
+                              ),
+                            )
+                          : null,
+                  title: Text(
+                    titles[index],
+                    style: const TextStyle(color: Colors.white),
                   ),
-                ),
-                SizedBox(height: 10),
-              ],
+                  onTap: () {
+                    Navigator.pop(context); // Close the drawer
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("${titles[index]} tapped")),
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],

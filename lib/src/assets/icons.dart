@@ -2,21 +2,37 @@
 
 import 'package:flutter/material.dart';
 
-const trendingIcon = Icons.trending_up;
-const shoppingIcon = Icons.shopping_cart;
-const musicIcon = Icons.music_note;
-const filmIcon = Icons.movie;
-const liveIcon = Icons.live_tv;
-const gamingIcon = Icons.sports_esports;
-const newsIcon = Icons.article;
-const sportIcon = Icons.sports_soccer;
-const coursesIcon = Icons.school;
-const fashionIcon = Icons.style;
-const podcastsIcon = Icons.mic;
+class AppIcons {
+  AppIcons._(); 
 
-const youtubePremiumIcon = Icons.video_library;
-const youtubeStudioIcon = Icons.video_library;
-const youtubeMusicIcon = Icons.music_note;
-const youtubeKidsIcon = Icons.play_arrow_outlined;
+  // drawers 
+  static const IconData trendingIcon = Icons.trending_up;
+  static const IconData shoppingIcon = Icons.shopping_cart;
+  static const IconData musicIcon = Icons.music_note;
+  static const IconData filmIcon = Icons.movie;
+  static const IconData liveIcon = Icons.live_tv;
+  static const IconData gamingIcon = Icons.sports_esports;
+  static const IconData newsIcon = Icons.article;
+  static const IconData sportIcon = Icons.sports_soccer;
+  static const IconData coursesIcon = Icons.school;
+  static const IconData fashionIcon = Icons.style;
+  static const IconData podcastsIcon = Icons.mic;
 
-const youtubeLogoImage = "assets/images/yt2.png"; 
+  static const IconData youtubePremiumIcon = Icons.video_library;
+  static const IconData youtubeStudioIcon = Icons.video_library;
+  static const IconData youtubeMusicIcon = Icons.music_note;
+  static const IconData youtubeKidsIcon = Icons.play_arrow_outlined;
+
+  // Image assets
+  static const String youtubeLogoImage = "assets/images/yt2.png";
+
+  // bottom bar 
+  static const IconData home = Icons.home ;
+  static const IconData shorts = Icons.explore ;
+  static const IconData subscriptions = Icons.subscriptions;
+  static const IconData you = Icons.verified_user ;
+  static const IconData add = Icons.add ;
+
+
+
+}

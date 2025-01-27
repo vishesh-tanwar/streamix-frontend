@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/assets/strings.dart';
+import 'package:project/src/utils/scale.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
   final List<String> categories;
@@ -22,7 +24,7 @@ class CustomSliverAppBar extends StatelessWidget {
       ),
       titleSpacing: 1,
       title: const Text(
-        "YouTube",
+        Strings.youtube,
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w500,
@@ -47,48 +49,54 @@ class CustomSliverAppBar extends StatelessWidget {
             );
           },
         ),
-      ], 
+      ],
       pinned: false,
       floating: true,
-      expandedHeight: 100,
+      expandedHeight: Scale.screenHeight * 0.14,
       flexibleSpace: FlexibleSpaceBar(
         background: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 48), 
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () => onDrawerTap(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(40, 40),
-                    ),
-                    child: const Icon(Icons.explore, color: Colors.white),
-                  ),
-                  ...categories.map((cat) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 3),
+            SizedBox(height: Scale.screenHeight * 0.07),
+            SizedBox(
+              height: Scale.screenHeight * 0.04, 
+              child: ListView.builder(        
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length + 1, 
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 6.0),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => onDrawerTap(),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 41, 41, 41),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(40, 40),
                         ),
-                        child: Text(
-                          cat,
-                          style: const TextStyle(color: Colors.white),
-                        ),
+                        child: const Icon(Icons.explore, color: Colors.white),
                       ),
                     );
-                  }),
-                ],
+                  }
+                  // Remaining category buttons
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 41, 41, 41),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.toScale),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                      ),
+                      child: Text(
+                        categories[index - 1], // Adjust for Explore button
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],

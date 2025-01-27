@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/utils/scale.dart';
 
 class ShortsHeader extends StatelessWidget {
   const ShortsHeader({Key? key}) : super(key: key);
@@ -14,9 +15,9 @@ class ShortsHeader extends StatelessWidget {
             children: [
               Image.asset(
                 "assets/images/reel_logo.png",
-                height: 37,
+                height: Scale.screenHeight * 0.045,
               ),
-              const SizedBox(width: 8), // Space between image and text
+              SizedBox(width: Scale.screenWidth * 0.01), // Space between image and text
               const Text(
                 "Shorts",
                 style: TextStyle(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/utils/scale.dart';
 import '../models/video.dart';
 
 class VideoCard extends StatelessWidget {
@@ -12,7 +13,7 @@ class VideoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
+      width: Scale.screenWidth,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 10, 10, 10),
         borderRadius: BorderRadius.circular(10),
@@ -22,26 +23,49 @@ class VideoCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Video Thumbnail
-          Image.asset(
-            video.thumbnail,
-            width: 360,
-            height: 200,
-            fit: BoxFit.cover,
+          Stack(
+            children: [
+              Image.asset(
+                video.thumbnail,
+                width: Scale.screenWidth,
+                height: Scale.screenHeight * 0.256,
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                top: 180,
+                left: 330,
+                child: Container(
+                  width: Scale.screenWidth * 0.1,
+                  height: Scale.screenHeight * 0.02,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(141, 0, 0, 0),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Center(
+                    child: Text(
+                      video.duration,
+                      style: TextStyle(color: Colors.white, fontSize: 11),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
+
+          SizedBox(height: Scale.screenHeight * 0.01),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(20), 
+                borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
                   video.thumbnail,
-                  width: 40,
-                  height: 40,
+                  width: Scale.screenWidth * 0.1,
+                  height: Scale.screenHeight * 0.05,
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(width: 10), 
+              SizedBox(width: Scale.screenWidth * 0.02),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +80,7 @@ class VideoCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 5),
+                    SizedBox(height: Scale.screenHeight * 0.004),
                     Text(
                       '${video.channelName} • ${video.views} views • ${video.uploadDate}',
                       style: const TextStyle(
@@ -71,7 +95,7 @@ class VideoCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: Scale.screenHeight * 0.02 ),
         ],
       ),
     );
