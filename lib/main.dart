@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/screens/profile_screen.dart';
+import 'package:project/src/screens/shorts_screen.dart';
 import 'package:project/src/utils/keys.dart';
 import 'src/screens/home_screen.dart'; 
 
-// late Size mq ;
 void main() {
   runApp(const MyApp());
 }
@@ -12,10 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // mq = MediaQuery.of(context).size ; 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(), navigatorKey: Keys.navigatorKey,
+      navigatorKey: Keys.navigatorKey,
+      initialRoute: '/', 
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/shorts' : (context) => ShortsScreen() ,
+        '/profile': (context) => ProfileScreen(),
+      },
     );
   }
 } 

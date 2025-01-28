@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/models/posts.dart';
 import 'package:project/src/utils/scale.dart';
+import 'package:project/src/widgets/post.dart';
 import 'package:project/src/widgets/reel_card.dart';
 import '../components/sliver_app_bar.dart';
 import '../components/bottom_bar.dart';
@@ -42,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: MyDrawer(),
       body: Container(
-        color: Colors.black, // Set background color to black
+        color: Colors.black, 
         child: SafeArea(
           child: Builder(
             builder: (BuildContext scaffoldContext) {
@@ -64,13 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             spacing: 6,
                             runSpacing: 6,
                             children: [ 
-                              // for (var reel in reelData)
-                              //   ReelCard(
-                              //     reels: reel,
-                              //   ),
                               ...List.generate(reelData.length,(i)=>ReelCard(reels: reelData[i])),
                             ],
                           ),
+                          PostCard(posts: postData[0]),
+
                           ...List.generate(homeData.length,(i)=>VideoCard(video: homeData[i])),
                         ],
                       ),

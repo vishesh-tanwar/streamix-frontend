@@ -21,14 +21,23 @@ class BottomBar extends StatelessWidget {
     AppIcons.you
   ];
 
+  final List<String> routes = [
+    '/',
+    '/shorts',
+    '',
+    '/subscriptions',
+    '/profile',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Scale.screenHeight* 0.07,
-      color: Colors.black, 
+      height: Scale.screenHeight * 0.07,
+      color: Colors.black,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(icons.length, (index) {
+          // Handle Add button separately
           if (titles[index].isEmpty) {
             return IconButton(
               icon: Icon(
@@ -37,28 +46,38 @@ class BottomBar extends StatelessWidget {
                 size: 30,
               ),
               onPressed: () {
-                
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Add button pressed")),
+                );
               },
             );
           }
 
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center, 
-            children: [
-              Icon(
-                icons[index],
-                color: Colors.white,
-                size: 24,
-              ),
-              SizedBox(height: Scale.screenHeight * 0.006),
-              Text(
-                titles[index],
-                style: const TextStyle(
+          // For other icons with navigation
+          return GestureDetector(
+            onTap: () {
+              if (routes[index].isNotEmpty) {
+                Navigator.pushNamed(context, routes[index]);
+              }
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icons[index],
                   color: Colors.white,
-                  fontSize: 10, 
+                  size: 24,
                 ),
-              ),
-            ],
+                SizedBox(height: Scale.screenHeight * 0.006),
+                Text(
+                  titles[index],
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                  ),
+                ),
+              ],
+            ),
           );
         }),
       ),

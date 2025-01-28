@@ -30,7 +30,7 @@ class ShortsHeader extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(right: 10.0), 
+          padding: EdgeInsets.only(right: 10.toScale), 
           child: const Icon(
             Icons.more_vert,
             color: Colors.white,

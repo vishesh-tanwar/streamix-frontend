@@ -18,7 +18,7 @@ class VideoCard extends StatelessWidget {
         color: const Color.fromARGB(255, 10, 10, 10),
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: const EdgeInsets.all(5),
+      padding: EdgeInsets.all(5.toScale),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,7 +39,7 @@ class VideoCard extends StatelessWidget {
                   height: Scale.screenHeight * 0.02,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(141, 0, 0, 0),
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(5.toScale),
                   ),
                   child: Center(
                     child: Text(

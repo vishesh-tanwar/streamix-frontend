@@ -112,7 +112,7 @@ class MyDrawer extends StatelessWidget {
                       : icons[index] is String
                           ? Transform.translate(
                               offset: const Offset(
-                                  -6.6, 0.0), // Move left by 10 pixels
+                                  -6.6, 0.0),
                               child: Image.asset(
                                 icons[index],
                                 height: Scale.screenHeight * 0.034,
