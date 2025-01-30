@@ -25,6 +25,14 @@ class AppIcons {
 
   // Image assets
   static const String youtubeLogoImage = "assets/images/yt2.png";
+  static const String ocean = "assets/images/image.jpeg";
+  static const String campeleon = "assets/images/image2.jpeg";
+  static const String moon = "assets/images/image3.jpeg";
+  static const String reelLogo = "assets/images/reel_logo.png";
+  static const String reel = "assets/images/reel.jpg";
+  static const String reel2 = "assets/images/reel2.jpg";
+  static const String reel3 = "assets/images/reel3.jpg";
+  static const String reel4 = "assets/images/reel4.jpg" ;
 
   // bottom bar 
   static const IconData home = Icons.home ;
@@ -33,6 +41,23 @@ class AppIcons {
   static const IconData you = Icons.verified_user ;
   static const IconData add = Icons.add ;
 
-
+  //bottom drawer 
+  static const IconData removeCircleOutline = Icons.remove_circle_outline ;
+  static const IconData threeDots = Icons.more_vert ;
+  static const IconData cancel = Icons.cancel ; 
+  static const IconData flag = Icons.flag ; 
+  static const banned = Icons.remove_circle ;
+  static const playNext = Icons.queue_music ;
+  static const clock = Icons.lock_clock ;
+  static const save = Icons.save_alt ; 
+  static const download = Icons.download ;
+  static const share = Icons.share ; 
+  static const dontRecommendChannel = Icons.supervised_user_circle;
+  
+  
+  // posts 
+  static const IconData thumbsUp  =  Icons.thumb_up;
+  static const IconData comment  =  Icons.comment;
+  static const IconData thumbDown = Icons.thumb_down_alt_outlined ;
 
 }

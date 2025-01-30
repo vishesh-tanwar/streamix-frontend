@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
 import 'package:project/src/utils/scale.dart';
 
@@ -19,7 +20,7 @@ class CustomSliverAppBar extends StatelessWidget {
       leading: Padding(
         padding: const EdgeInsets.only(left: 5.0),
         child: Image.asset(
-          'assets/images/yt2.png',
+          AppIcons.youtubeLogoImage,
         ),
       ),
       titleSpacing: 1,
@@ -62,7 +63,7 @@ class CustomSliverAppBar extends StatelessWidget {
               height: Scale.screenHeight * 0.04, 
               child: ListView.builder(        
                 scrollDirection: Axis.horizontal,
-                itemCount: categories.length + 1, 
+                itemCount: categories.length + 2, 
                 itemBuilder: (context, index) {
                   if (index == 0) {
                     return Padding(
@@ -78,6 +79,11 @@ class CustomSliverAppBar extends StatelessWidget {
                       ),
                     );
                   }
+                  if (index == categories.length+1){
+                    return Padding(padding: EdgeInsets.only(left: 6.0,right: 6.0,top: 6.0),
+                      child: Text("Send Feedback",style: TextStyle(color: Colors.blue),),
+                    );
+                  }
                   // Remaining category buttons
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 3),
@@ -91,7 +97,7 @@ class CustomSliverAppBar extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                       ),
                       child: Text(
-                        categories[index - 1], // Adjust for Explore button
+                        categories[index - 1], 
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),

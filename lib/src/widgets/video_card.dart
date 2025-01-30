@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/assets/icons.dart';
+import 'package:project/src/assets/strings.dart';
+import 'package:project/src/components/bottom_drawer.dart';
 import 'package:project/src/utils/scale.dart';
 import '../models/video.dart';
 
@@ -32,8 +35,8 @@ class VideoCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Positioned(
-                top: 180,
-                left: 330,
+                top: 174.toScale,
+                left: 322.toScale,
                 child: Container(
                   width: Scale.screenWidth * 0.1,
                   height: Scale.screenHeight * 0.02,
@@ -92,6 +95,22 @@ class VideoCard extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              IconButton(
+                onPressed: (){
+                  showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (BuildContext context) {
+                          return BottomDrawer(
+                            icons: [AppIcons.playNext,AppIcons.clock,AppIcons.save,AppIcons.download,AppIcons.share,AppIcons.banned,AppIcons.dontRecommendChannel,AppIcons.flag],
+                            texts: [Strings.playNextInQueue,Strings.saveToWatchLater,Strings.saveToPlaylist,Strings.downloadVideo,Strings.share,Strings.dontRecommend,Strings.report],
+                          );
+                        },
+                      );
+                }, 
+                icon: Icon(AppIcons.threeDots,color: Colors.white,size: 20,)
               ),
             ],
           ),

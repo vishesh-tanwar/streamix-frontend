@@ -49,7 +49,7 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Scale.screenWidth * 0.64,
-      color: Colors.black,
+      color: const Color.fromARGB(255, 34, 34, 34),
       child: Column(
         children: [
           // Header Section

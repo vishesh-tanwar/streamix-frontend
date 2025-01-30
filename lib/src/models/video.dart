@@ -1,3 +1,5 @@
+import 'package:project/src/assets/icons.dart';
+
 class Video {
   final String thumbnail;
   final String title;
@@ -20,7 +22,7 @@ class Video {
 
 List<Video> homeData = [
   Video(
-    thumbnail: 'assets/images/image.jpeg',
+    thumbnail: AppIcons.ocean,
     title: 'Flutter Tutorial',
     duration: '10:30',
     link: 'https://www.example.com/video1',
@@ -29,7 +31,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-20',
   ),
   Video(
-    thumbnail: 'assets/images/image2.jpeg',
+    thumbnail: AppIcons.campeleon,
     title: 'Dart Programming',
     duration: '15:45',
     link: 'https://www.example.com/video2',
@@ -38,7 +40,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-19',
   ),
   Video(
-    thumbnail: 'assets/images/image3.jpeg',
+    thumbnail: AppIcons.moon,
     title: 'Flutter Tutorial',
     duration: '10:30',
     link: 'https://www.example.com/video1',
@@ -47,7 +49,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-20',
   ),
   Video(
-    thumbnail: 'assets/images/image.jpeg',
+    thumbnail: AppIcons.ocean,
     title: 'Dart Programming',
     duration: '15:45',
     link: 'https://www.example.com/video2',
@@ -56,7 +58,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-19',
   ),
   Video(
-    thumbnail: 'assets/images/image2.jpeg',
+    thumbnail: AppIcons.moon,
     title: 'Flutter Tutorial',
     duration: '10:30',
     link: 'https://www.example.com/video1',
@@ -65,7 +67,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-20',
   ),
   Video(
-    thumbnail: 'assets/images/image3.jpeg',
+    thumbnail: AppIcons.campeleon,
     title: 'Dart Programming',
     duration: '15:45',
     link: 'https://www.example.com/video2',
@@ -74,7 +76,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-19',
   ),
   Video(
-    thumbnail: 'assets/images/image.jpeg',
+    thumbnail: AppIcons.ocean,
     title: 'Flutter Tutorial',
     duration: '10:30',
     link: 'https://www.example.com/video1',
@@ -83,7 +85,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-20',
   ),
   Video(
-    thumbnail: 'assets/images/image2.jpeg',
+    thumbnail: AppIcons.campeleon,
     title: 'Dart Programming',
     duration: '15:45',
     link: 'https://www.example.com/video2',

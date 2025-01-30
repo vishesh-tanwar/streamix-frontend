@@ -1,3 +1,6 @@
+import 'package:project/src/assets/icons.dart';
+import 'package:project/src/assets/strings.dart';
+
 class Reels {
   final String thumbnail ;
   final String title ;
@@ -10,11 +13,11 @@ class Reels {
 
 List<Reels> reelData = [
   Reels(
-    thumbnail: "assets/images/reel.jpg",
-    title: "i am coming home "
+    thumbnail: AppIcons.reel,
+    title: Strings.reelTitle 
   ),
-  Reels(thumbnail: "assets/images/reel2.jpg",title: "wait for the end !! our people doing a lot to save the nature"),
-  Reels(thumbnail: "assets/images/reel3.jpg",title: "the dog mom who raised the tiger #love"),
-  Reels(thumbnail: "assets/images/reel4.jpg",title: "day 447: doing push ups to push my limit !! #hustle"),
+  Reels(thumbnail: AppIcons.reel2,title: Strings.reel2Title),
+  Reels(thumbnail: AppIcons.reel3, title: Strings.reel3Title),
+  Reels(thumbnail: AppIcons.reel4, title: Strings.reel4Title),
 ];
 
