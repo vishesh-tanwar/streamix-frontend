@@ -3,7 +3,6 @@ import 'package:project/src/utils/scale.dart';
 import '../assets/icons.dart';
 import '../assets/strings.dart';
 
-// ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
   MyDrawer({Key? key}) : super(key: key);
 
@@ -19,7 +18,6 @@ class MyDrawer extends StatelessWidget {
     Strings.courses,
     Strings.fashionAndBeauty,
     Strings.podcasts,
-    "divider", // Divider marker
     Strings.youtubePremium,
     Strings.youtubeStudio,
     Strings.youtubeMusic,
@@ -38,7 +36,6 @@ class MyDrawer extends StatelessWidget {
     AppIcons.coursesIcon,
     AppIcons.fashionIcon,
     AppIcons.podcastsIcon,
-    true, // Divider marker
     AppIcons.youtubeLogoImage,
     AppIcons.youtubeStudioIcon,
     AppIcons.youtubeMusicIcon,
@@ -74,9 +71,19 @@ class MyDrawer extends StatelessWidget {
           ),
 
           Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
               padding: EdgeInsets.zero,
               itemCount: titles.length + 1,
+              separatorBuilder: (context, index) {
+                // Add divider after the first 11 items
+                if (index == 10) {
+                  return const Divider(
+                    color: Color.fromARGB(255, 75, 72, 72),
+                    thickness: 2,
+                  );
+                }
+                return const SizedBox.shrink();
+              },
               itemBuilder: (context, index) {
                 if (index == titles.length) {
                   // Footer Section
@@ -91,40 +98,26 @@ class MyDrawer extends StatelessWidget {
                     ),
                   );
                 }
-
-                // Handle divider
-                if (titles[index] == "divider") {
-                  return const Divider(
-                    color: Color.fromARGB(255, 44, 44, 44),
-                    thickness: 2,
-                  );
-                }
-
                 // Handle list tiles
                 return ListTile(
                   leading: icons[index] is IconData
                       ? Icon(
                           icons[index],
-                          color: index > 11
-                              ? Colors.red // Icon color red for indices > 11
-                              : Colors.white,
+                          color: index > 10 ? Colors.red : Colors.white,
                         )
-                      : icons[index] is String
-                          ? Transform.translate(
-                              offset: const Offset(
-                                  -6.6, 0.0),
-                              child: Image.asset(
-                                icons[index],
-                                height: Scale.screenHeight * 0.034,
-                              ),
-                            )
-                          : null,
+                      : Transform.translate(
+                          offset: const Offset(-6.6, 0.0),
+                          child: Image.asset(
+                            icons[index],
+                            height: Scale.screenHeight * 0.034,
+                          ),
+                        ),
                   title: Text(
                     titles[index],
                     style: const TextStyle(color: Colors.white),
                   ),
                   onTap: () {
-                    Navigator.pop(context); // Close the drawer
+                    Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("${titles[index]} tapped")),
                     );
