@@ -13,7 +13,7 @@ class ProfileHeader extends StatelessWidget {
             width: Scale.screenWidth * 0.17,
             height: Scale.screenHeight * 0.08,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(30.toScale),
               image: const DecorationImage(
                 image: AssetImage(AppIcons.reel2),
                 fit: BoxFit.cover,

@@ -11,7 +11,6 @@ class PlaylistBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: Scale.screenWidth * ,
       color: const Color.fromARGB(255, 0, 0, 0),
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -40,7 +39,7 @@ class PlaylistBar extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 4),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.toScale),
                         side: const BorderSide(
                             color: Color.fromARGB(255, 94, 92, 92)),
                       ),
@@ -53,7 +52,6 @@ class PlaylistBar extends StatelessWidget {
               )
             ],
           ),
-          // const SizedBox(height: 10),
           SizedBox(
             height: Scale.screenHeight * 0.172,
             child: ListView.separated(

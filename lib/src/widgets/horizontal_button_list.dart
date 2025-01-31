@@ -23,7 +23,7 @@ class HorizontalButtonList extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 34, 34, 34),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.toScale),
                 ),
               ),
               onPressed: () {
