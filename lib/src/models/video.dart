@@ -31,7 +31,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-20',
   ),
   Video(
-    thumbnail: AppIcons.campeleon,
+    thumbnail: AppIcons.cameleon,
     title: 'Dart Programming',
     duration: '15:45',
     link: 'https://www.example.com/video2',
@@ -67,7 +67,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-20',
   ),
   Video(
-    thumbnail: AppIcons.campeleon,
+    thumbnail: AppIcons.cameleon,
     title: 'Dart Programming',
     duration: '15:45',
     link: 'https://www.example.com/video2',
@@ -85,7 +85,7 @@ List<Video> homeData = [
     uploadDate: '2025-01-20',
   ),
   Video(
-    thumbnail: AppIcons.campeleon,
+    thumbnail: AppIcons.cameleon,
     title: 'Dart Programming',
     duration: '15:45',
     link: 'https://www.example.com/video2',
@@ -93,4 +93,4 @@ List<Video> homeData = [
     views: '2M',
     uploadDate: '2025-01-19',
   ),
-]; 
+];

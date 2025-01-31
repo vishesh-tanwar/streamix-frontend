@@ -39,17 +39,27 @@ class BottomBar extends StatelessWidget {
         children: List.generate(icons.length, (index) {
           // Handle Add button separately
           if (titles[index].isEmpty) {
-            return IconButton(
-              icon: Icon(
-                icons[index],
-                color: Colors.white,
-                size: 30,
+            return Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: const Color.fromARGB(255, 53, 53, 53),
               ),
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Add button pressed")),
-                );
-              },
+              child: Center(
+                child: IconButton(
+                  icon: Icon(
+                    icons[index],
+                    color: Colors.white,
+                    size: 23,
+                  ),
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Add button pressed")),
+                    );
+                  },
+                ),
+              ),
             );
           }
 
