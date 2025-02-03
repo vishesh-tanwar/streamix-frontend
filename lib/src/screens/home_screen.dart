@@ -4,7 +4,6 @@ import 'package:project/src/utils/scale.dart';
 import 'package:project/src/widgets/post.dart';
 import 'package:project/src/widgets/reel_card.dart';
 import '../components/sliver_app_bar.dart';
-import '../components/bottom_bar.dart';
 import '../components/drawer.dart';
 import '../widgets/video_card.dart';
 import '../models/video.dart';
@@ -85,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomBar(),
     );
   }
 }

@@ -1,5 +1,3 @@
-// lib/src/assets/icons.dart
-
 import 'package:flutter/material.dart';
 
 class AppIcons {
@@ -40,6 +38,10 @@ class AppIcons {
   static const IconData subscriptions = Icons.subscriptions;
   static const IconData you = Icons.verified_user;
   static const IconData add = Icons.add;
+  static const IconData homeFill = Icons.home_outlined;
+  static const IconData shortsFill = Icons.explore_outlined;
+  static const IconData youFill = Icons.verified_user_outlined;
+  static const IconData subscriptionFill = Icons.subscriptions_outlined;
 
   //bottom drawer
   static const IconData removeCircleOutline = Icons.remove_circle_outline;

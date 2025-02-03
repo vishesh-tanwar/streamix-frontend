@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
-import 'package:project/src/components/bottom_bar.dart';
 import 'package:project/src/widgets/history_bar.dart';
 import 'package:project/src/widgets/horizontal_button_list.dart';
 import 'package:project/src/widgets/list_section.dart';
@@ -83,7 +82,6 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(),
     );
   }
 }

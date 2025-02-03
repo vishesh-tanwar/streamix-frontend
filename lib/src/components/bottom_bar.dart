@@ -1,91 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:project/src/utils/scale.dart';
-import '../assets/strings.dart';
-import '../assets/icons.dart';
+import 'package:project/src/assets/icons.dart';
+import 'package:project/src/screens/create_reel_screen.dart';
+import 'package:project/src/screens/home_screen.dart';
+import 'package:project/src/screens/profile_screen.dart';
+import 'package:project/src/screens/shorts_screen.dart';
+import 'package:project/src/screens/subscription_screen.dart';
+import '../utils/scale.dart';
 
-class BottomBar extends StatelessWidget {
-  BottomBar({Key? key}) : super(key: key);
+class BottomBar extends StatefulWidget {
+  const BottomBar({super.key});
 
-  final List<String> titles = [
-    Strings.home,
-    Strings.shorts,
-    "",
-    Strings.subscriptions,
-    Strings.you
+  @override
+  _BottomBarState createState() => _BottomBarState();
+}
+
+class _BottomBarState extends State<BottomBar> {
+  int myIndex = 0;
+
+  final List<Widget> widgetList = [
+    HomeScreen(),
+    ShortsScreen(
+      showBackButton: false,
+    ),
+    CreateReelScreen(),
+    SubscriptionScreen(),
+    ProfileScreen()
   ];
-  final List<IconData> icons = [
+
+  final List<IconData> activeIcons = [
     AppIcons.home,
     AppIcons.shorts,
     AppIcons.add,
     AppIcons.subscriptions,
-    AppIcons.you
+    AppIcons.you,
   ];
 
-  final List<String> routes = [
-    '/',
-    '/shorts',
-    '',
-    '/subscriptions',
-    '/profile',
+  final List<IconData> inactiveIcons = [
+    AppIcons.homeFill,
+    AppIcons.shortsFill,
+    AppIcons.add,
+    AppIcons.subscriptionFill,
+    AppIcons.youFill,
   ];
+
+  final List<String> labels = ['Home', 'Shorts', '', 'Subscriptions', 'You'];
+
+  @override
+  void initState() {
+    Scale.initialize();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Scale.screenHeight * 0.06,
-      color: Colors.black,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(icons.length, (index) {
-          if (titles[index].isEmpty) {
-            return Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: const Color.fromARGB(255, 53, 53, 53),
+    return Scaffold(
+      body: widgetList[myIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        selectedLabelStyle: TextStyle(fontSize: 11.8),
+        showUnselectedLabels: true,
+        unselectedItemColor: Colors.white70,
+        selectedItemColor: Colors.white,
+        showSelectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.black,
+        onTap: (index) {
+          setState(() {
+            myIndex = index;
+          });
+        },
+        currentIndex: myIndex,
+        items: List.generate(5, (index) {
+          return BottomNavigationBarItem(
+              icon: Icon(
+                myIndex == index ? activeIcons[index] : inactiveIcons[index],
               ),
-              child: Center(
-                child: IconButton(
-                  icon: Icon(
-                    icons[index],
-                    color: Colors.white,
-                    size: 23,
-                  ),
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Add button pressed")),
-                    );
-                  },
-                ),
-              ),
-            );
-          }
-
-          // For other icons with navigation
-          return GestureDetector(
-            onTap: () {
-              if (routes[index].isNotEmpty) {
-                Navigator.pushNamed(context, routes[index]);
-              }
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  icons[index],
-                  color: Colors.white,
-                  size: 24,
-                ),
-                SizedBox(height: Scale.screenHeight * 0.002),
-                Text(titles[index],
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                    )),
-              ],
-            ),
-          );
+              label: labels[index]);
         }),
       ),
     );

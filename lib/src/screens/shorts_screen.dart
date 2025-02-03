@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
-import 'package:project/src/components/bottom_bar.dart';
 import 'package:project/src/utils/scale.dart';
 
 class ShortsScreen extends StatelessWidget {
+  final bool showBackButton;
+
+  ShortsScreen({Key? key, this.showBackButton = false}) : super(key: key);
+
   final List<String> reels = [
     AppIcons.reel,
     AppIcons.reel2,
@@ -127,7 +130,7 @@ class ShortsScreen extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                      top: 560,
+                      top: showBackButton ? 600 : 560,
                       left: 12,
                       child: Column(
                         children: [
@@ -171,7 +174,7 @@ class ShortsScreen extends StatelessWidget {
                         ],
                       )),
                   Positioned(
-                      top: 600,
+                      top: showBackButton ? 650 : 600,
                       child: Container(
                         width: 370,
                         padding: EdgeInsets.all(10),
@@ -197,14 +200,19 @@ class ShortsScreen extends StatelessWidget {
                 child: Row(
                   spacing: 176,
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        )),
+                    if (showBackButton)
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ))
+                    else
+                      SizedBox(
+                        width: 48,
+                      ),
                     Row(
                       children: [
                         IconButton(
@@ -225,7 +233,6 @@ class ShortsScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(),
     );
   }
 }
