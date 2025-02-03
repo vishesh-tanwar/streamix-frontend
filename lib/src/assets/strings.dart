@@ -24,7 +24,7 @@ class Strings {
   // bottom bar
   static const String home = "Home";
   static const String shorts = "Shorts";
-  static const String subscriptions = "Subscriptions";
+  static const String subscriptions = "Subscription";
   static const String you = "You";
 
   // home screen filter

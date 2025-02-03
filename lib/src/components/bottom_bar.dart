@@ -32,12 +32,11 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Scale.screenHeight * 0.07,
+      height: Scale.screenHeight * 0.06,
       color: Colors.black,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(icons.length, (index) {
-          // Handle Add button separately
           if (titles[index].isEmpty) {
             return Container(
               width: 40,
@@ -78,14 +77,12 @@ class BottomBar extends StatelessWidget {
                   color: Colors.white,
                   size: 24,
                 ),
-                SizedBox(height: Scale.screenHeight * 0.006),
-                Text(
-                  titles[index],
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                  ),
-                ),
+                SizedBox(height: Scale.screenHeight * 0.002),
+                Text(titles[index],
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    )),
               ],
             ),
           );

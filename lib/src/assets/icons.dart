@@ -62,4 +62,6 @@ class AppIcons {
   // profile page
   static const IconData g = Icons.g_mobiledata;
   static const IconData hailOutlined = Icons.hail_outlined;
+
+  static const IconData addAlarm = Icons.add_alarm;
 }

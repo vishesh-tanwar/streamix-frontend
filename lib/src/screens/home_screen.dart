@@ -9,7 +9,7 @@ import '../components/drawer.dart';
 import '../widgets/video_card.dart';
 import '../models/video.dart';
 import '../models/reels.dart';
-import '../widgets/short_header.dart'; 
+import '../widgets/short_header.dart';
 import '../assets/strings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void openDrawer(BuildContext context) {
     Scaffold.of(context).openDrawer();
   }
+
   @override
   void initState() {
     Scale.initialize();
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: MyDrawer(),
       body: Container(
-        color: Colors.black, 
+        color: Colors.black,
         child: SafeArea(
           child: Builder(
             builder: (BuildContext scaffoldContext) {
@@ -54,24 +55,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     categories: category,
                     onDrawerTap: () => openDrawer(scaffoldContext),
                   ),
-                  
                   SliverToBoxAdapter(
                     child: Container(
                       color: Colors.black,
                       child: Column(
                         children: [
                           const ShortsHeader(),
-                          SizedBox(height: Scale.screenHeight * 0.014,), 
+                          SizedBox(
+                            height: Scale.screenHeight * 0.014,
+                          ),
                           Wrap(
                             spacing: 6,
                             runSpacing: 6,
-                            children: [ 
-                              ...List.generate(reelData.length,(i)=>ReelCard(reels: reelData[i])),
+                            children: [
+                              ...List.generate(reelData.length,
+                                  (i) => ReelCard(reels: reelData[i])),
                             ],
                           ),
                           PostCard(posts: postData[0]),
-
-                          ...List.generate(homeData.length,(i)=>VideoCard(video: homeData[i])),
+                          ...List.generate(homeData.length,
+                              (i) => VideoCard(video: homeData[i])),
                         ],
                       ),
                     ),

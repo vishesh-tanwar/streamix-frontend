@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/src/screens/profile_screen.dart';
 import 'package:project/src/screens/shorts_screen.dart';
 import 'package:project/src/utils/keys.dart';
-import 'src/screens/home_screen.dart'; 
+import 'src/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: Keys.navigatorKey,
-      initialRoute: '/', 
+      initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
-        '/shorts' : (context) => ShortsScreen() ,
+        '/shorts': (context) => ShortsScreen(),
         '/profile': (context) => ProfileScreen(),
       },
     );
   }
-} 
+}
