@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/models/posts.dart';
+import 'package:project/src/screens/watch_video_screen.dart';
 import 'package:project/src/utils/scale.dart';
 import 'package:project/src/widgets/post.dart';
 import 'package:project/src/widgets/reel_card.dart';
@@ -72,8 +73,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           PostCard(posts: postData[0]),
-                          ...List.generate(homeData.length,
-                              (i) => VideoCard(video: homeData[i])),
+                          ...List.generate(
+                            homeData.length,
+                            (i) => GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        WatchVideoScreen(video: homeData[i]),
+                                  ),
+                                );
+                              },
+                              child: VideoCard(video: homeData[i]),
+                            ),
+                          ),
                         ],
                       ),
                     ),

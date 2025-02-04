@@ -36,7 +36,7 @@ class VideoCard extends StatelessWidget {
               ),
               Positioned(
                 top: 174.toScale,
-                left: 322.toScale,
+                left: 320.toScale,
                 child: Container(
                   width: Scale.screenWidth * 0.1,
                   height: Scale.screenHeight * 0.02,
@@ -97,24 +97,44 @@ class VideoCard extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: (){
-                  showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (BuildContext context) {
-                          return BottomDrawer(
-                            icons: [AppIcons.playNext,AppIcons.clock,AppIcons.save,AppIcons.download,AppIcons.share,AppIcons.banned,AppIcons.dontRecommendChannel,AppIcons.flag],
-                            texts: [Strings.playNextInQueue,Strings.saveToWatchLater,Strings.saveToPlaylist,Strings.downloadVideo,Strings.share,Strings.dontRecommend,Strings.report],
-                          );
-                        },
-                      );
-                }, 
-                icon: Icon(AppIcons.threeDots,color: Colors.white,size: 20,)
-              ),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (BuildContext context) {
+                        return BottomDrawer(
+                          icons: [
+                            AppIcons.playNext,
+                            AppIcons.clock,
+                            AppIcons.save,
+                            AppIcons.download,
+                            AppIcons.share,
+                            AppIcons.banned,
+                            AppIcons.dontRecommendChannel,
+                            AppIcons.flag
+                          ],
+                          texts: [
+                            Strings.playNextInQueue,
+                            Strings.saveToWatchLater,
+                            Strings.saveToPlaylist,
+                            Strings.downloadVideo,
+                            Strings.share,
+                            Strings.dontRecommend,
+                            Strings.report
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  icon: Icon(
+                    AppIcons.threeDots,
+                    color: Colors.white,
+                    size: 20,
+                  )),
             ],
           ),
-          SizedBox(height: Scale.screenHeight * 0.02 ),
+          SizedBox(height: Scale.screenHeight * 0.02),
         ],
       ),
     );
