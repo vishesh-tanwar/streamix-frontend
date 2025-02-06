@@ -83,4 +83,5 @@ class AppIcons {
   static const pay = Icons.paid;
   static const description = Icons.description;
   static const checklist = Icons.checklist;
+  static const thumbnail = Icons.photo;
 }

@@ -5,24 +5,14 @@ import 'package:project/src/assets/strings.dart';
 class UploadBody extends StatelessWidget {
   final List<IconData> logo = [
     AppIcons.visibility,
-    AppIcons.userCircle,
+    AppIcons.thumbnail,
     AppIcons.descriptionLine,
-    AppIcons.play,
-    AppIcons.addCardSharp,
-    AppIcons.pay,
-    AppIcons.description,
-    AppIcons.checklist
   ];
 
   final List<String> label = [
     Strings.visibility,
-    Strings.selectAudience,
+    Strings.thumbnail,
     Strings.addDescription,
-    Strings.relatedVideo,
-    Strings.addToPlaylist,
-    Strings.addPaidPromotionLabel,
-    Strings.commentsRemixing,
-    Strings.locationTagsAlteredContent
   ];
 
   @override

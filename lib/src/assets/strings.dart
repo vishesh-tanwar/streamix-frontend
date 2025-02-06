@@ -100,4 +100,5 @@ class Strings {
   static const String commentsRemixing = "Comments,Remixing";
   static const String locationTagsAlteredContent =
       "Location, Tags, and Altered content";
+  static const String thumbnail = "thumbnail";
 }
