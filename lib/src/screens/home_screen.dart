@@ -68,8 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             spacing: 6,
                             runSpacing: 6,
                             children: [
-                              ...List.generate(reelData.length,
-                                  (i) => ReelCard(reels: reelData[i])),
+                              ...List.generate(
+                                  4, (i) => ReelCard(reels: reelData[i])),
                             ],
                           ),
                           PostCard(posts: postData[0]),

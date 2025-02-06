@@ -27,7 +27,8 @@ List<Video> homeData = [
     title:
         'Flutter Tutorial - John XCena makes final royal rumble entrance of his career : Royal Rumble 2025',
     duration: '10:30',
-    link: 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+    link:
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
     channelName: 'FlutterDev',
     views: '1M',
     description:

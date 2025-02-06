@@ -40,4 +40,16 @@ List<Reels> reelData = [
       channel: "@yummySnack",
       video:
           'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
+  Reels(
+      thumbnail: AppIcons.reel4,
+      title: Strings.reel4Title,
+      channel: "@yummySnack",
+      video:
+          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
+  Reels(
+      thumbnail: AppIcons.reel4,
+      title: Strings.reel4Title,
+      channel: "@yummySnack",
+      video:
+          'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
 ];

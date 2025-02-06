@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/models/video.dart';
+import 'package:project/src/utils/scale.dart';
 
 class Description extends StatelessWidget {
   final Video video;
@@ -10,7 +11,7 @@ class Description extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
-      height: 515,
+      height: Scale.screenHeight * 0.63,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +54,7 @@ class Description extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: Scale.screenHeight * 0.02),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -119,7 +120,7 @@ class Description extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: Scale.screenHeight * 0.02),
                   Container(
                     width: double.maxFinite,
                     decoration: BoxDecoration(

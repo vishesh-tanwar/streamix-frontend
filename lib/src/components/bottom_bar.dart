@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
-import 'package:project/src/screens/create_reel_screen.dart';
+import 'package:project/src/screens/create_video_screen.dart';
 import 'package:project/src/screens/home_screen.dart';
 import 'package:project/src/screens/profile_screen.dart';
 import 'package:project/src/screens/shorts_screen.dart';
@@ -20,10 +20,9 @@ class _BottomBarState extends State<BottomBar> {
   final List<Widget> widgetList = [
     HomeScreen(),
     ShortsScreen(
-      // videoUrl: "",
       showBackButton: false,
     ),
-    CreateReelScreen(),
+    CreateVideoScreen(),
     SubscriptionScreen(),
     ProfileScreen()
   ];

@@ -66,4 +66,21 @@ class AppIcons {
   static const IconData hailOutlined = Icons.hail_outlined;
 
   static const IconData addAlarm = Icons.add_alarm;
+
+  // watch video
+  static const IconData remix = Icons.video_camera_back_rounded;
+  static const IconData money = Icons.money;
+  static const IconData stopCircle = Icons.stop_circle;
+  static const IconData clip = Icons.logo_dev;
+
+  // upload video
+  static const IconData arrowBack = Icons.arrow_back;
+  static const visibility = Icons.lightbulb_circle_rounded;
+  static const userCircle = Icons.supervised_user_circle;
+  static const descriptionLine = Icons.line_weight_outlined;
+  static const play = Icons.play_arrow;
+  static const addCardSharp = Icons.add_card_sharp;
+  static const pay = Icons.paid;
+  static const description = Icons.description;
+  static const checklist = Icons.checklist;
 }

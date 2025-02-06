@@ -79,4 +79,25 @@ class Strings {
   static const String getYoutubePremium = 'Get Youtube Premium';
   static const String timeWatched = 'Time Watched';
   static const String helpAndFeedback = 'Help and Feedback';
+
+  // upload video
+  static const String reel = 'Reel';
+  static const String video = "Video";
+  static const String post = 'Post';
+  static const String addDetails = "Add details";
+  static const String captionVideo = "Caption your video";
+  static const String remix = "Remix";
+  static const String thanks = "Thanks";
+  static const String stopAds = "Stop ads";
+  static const String clip = "Clip";
+  static const String save = "Save";
+  static const String visibility = "Visibility";
+  static const String selectAudience = "Select audience";
+  static const String addDescription = "Add description";
+  static const String relatedVideo = "Related video";
+  static const String addToPlaylist = "Add to playlist";
+  static const String addPaidPromotionLabel = "Add paid promotion label";
+  static const String commentsRemixing = "Comments,Remixing";
+  static const String locationTagsAlteredContent =
+      "Location, Tags, and Altered content";
 }
