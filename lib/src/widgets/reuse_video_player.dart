@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/utils/scale.dart';
 import 'package:video_player/video_player.dart';
 
 class ReusableVideoPlayer extends StatefulWidget {
@@ -23,7 +24,6 @@ class _ReusableVideoPlayerState extends State<ReusableVideoPlayer> {
         VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
           ..initialize().then((_) {
             setState(() {});
-            _videoController.setLooping(true);
             _videoController.play();
           });
   }
@@ -79,7 +79,7 @@ class _ReusableVideoPlayerState extends State<ReusableVideoPlayer> {
               duration: const Duration(milliseconds: 200),
               child: Icon(
                 _controlIcon,
-                size: 80,
+                size: 80.toScale,
                 color: Colors.white70,
               ),
             ),

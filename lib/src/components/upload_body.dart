@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
+import 'package:project/src/utils/scale.dart';
 
 class UploadBody extends StatelessWidget {
   final List<IconData> logo = [
@@ -27,19 +28,16 @@ class UploadBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
+                padding: EdgeInsets.symmetric(vertical: 15.toScale),
                 child: RichText(
                   text: const TextSpan(
                     style: TextStyle(
                         color: Color.fromARGB(255, 187, 184, 184),
                         fontSize: 11.5),
                     children: <TextSpan>[
+                      TextSpan(text: Strings.uploadText),
                       TextSpan(
-                        text:
-                            "Regardless of your location, you're legally required to comply with the US Children's Online Policy Protection Act (COPPA) and/or other laws. You're required to tell us whether your videos are made for kids.",
-                      ),
-                      TextSpan(
-                        text: " What's content Made for Kids?",
+                        text: Strings.uploadText2,
                         style: TextStyle(color: Colors.blue),
                       ),
                     ],
@@ -47,14 +45,14 @@ class UploadBody extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
+                padding: EdgeInsets.symmetric(vertical: 15.toScale),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
                         Icon(logo[index], color: Colors.white),
-                        const SizedBox(width: 8),
+                        SizedBox(width: Scale.screenWidth * 0.02),
                         Text(
                           label[index],
                           style: const TextStyle(color: Colors.white),
@@ -69,14 +67,14 @@ class UploadBody extends StatelessWidget {
           );
         } else {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            padding: EdgeInsets.symmetric(vertical: 15.toScale),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
                     Icon(logo[index], color: Colors.white),
-                    const SizedBox(width: 8),
+                    SizedBox(width: Scale.screenWidth * 0.02),
                     Text(label[index],
                         style: const TextStyle(color: Colors.white)),
                   ],

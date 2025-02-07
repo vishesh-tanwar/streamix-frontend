@@ -13,7 +13,7 @@ class WatchVideoReel extends StatelessWidget {
         Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 10.0),
+              padding: EdgeInsets.only(left: 10.toScale),
               child: Row(
                 children: [
                   Image.asset(
@@ -37,13 +37,13 @@ class WatchVideoReel extends StatelessWidget {
         SizedBox(
           height: Scale.screenHeight * 0.36,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.toScale),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: reelData.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(2.0),
+                  padding: EdgeInsets.all(2.toScale),
                   child: ReelCard(reels: reelData[index]),
                 );
               },

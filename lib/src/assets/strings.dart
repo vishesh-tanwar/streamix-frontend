@@ -101,4 +101,20 @@ class Strings {
   static const String locationTagsAlteredContent =
       "Location, Tags, and Altered content";
   static const String thumbnail = "thumbnail";
+  static const String uploadText =
+      "Regardless of your location, you're legally required to comply with the US Children's Online Policy Protection Act (COPPA) and/or other laws. You're required to tell us whether your videos are made for kids.";
+  static const String uploadText2 = " What's content Made for Kids?";
+  static const String uploadShort = "Upload Short";
+  static const String saveDraft = "Save draft";
+
+  static const String noComments = "No comments yet !!";
+  static const String zeroComments = "Comments  0";
+
+  static const description = "Description";
+  static const likes = "Likes";
+  static const views = "Views";
+  static const date = "Date";
+  static const like = "Like";
+  static const dislike = "Dislike";
+  static const comment = "Comment";
 }

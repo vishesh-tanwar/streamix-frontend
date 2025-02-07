@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/models/video.dart';
 import 'package:project/src/utils/scale.dart';
+import 'package:project/src/assets/strings.dart';
 
 class Description extends StatelessWidget {
   final Video video;
@@ -18,12 +19,12 @@ class Description extends StatelessWidget {
         children: [
           // Fixed description headline
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.toScale),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Description",
+                  Strings.description,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -42,7 +43,7 @@ class Description extends StatelessWidget {
           // Scrollable content
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(10.toScale),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -69,7 +70,7 @@ class Description extends StatelessWidget {
                             ),
                           ),
                           const Text(
-                            "Likes",
+                            Strings.likes,
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 12,
@@ -89,7 +90,7 @@ class Description extends StatelessWidget {
                             ),
                           ),
                           const Text(
-                            "Views",
+                            Strings.views,
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 12,
@@ -109,7 +110,7 @@ class Description extends StatelessWidget {
                             ),
                           ),
                           const Text(
-                            "Date",
+                            Strings.date,
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 12,
@@ -125,10 +126,10 @@ class Description extends StatelessWidget {
                     width: double.maxFinite,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 39, 39, 39),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.toScale),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.toScale),
                       child: Text(
                         video.description,
                         style: const TextStyle(color: Colors.white),

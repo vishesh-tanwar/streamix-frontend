@@ -5,8 +5,15 @@ import 'package:project/src/components/upload_body.dart';
 import 'package:project/src/components/upload_bottom_bar.dart';
 import 'package:project/src/utils/scale.dart';
 
-class CreateVideoScreen extends StatelessWidget {
+class CreateVideoScreen extends StatefulWidget {
+  @override
+  State<CreateVideoScreen> createState() => _CreateVideoScreenState();
+}
+
+class _CreateVideoScreenState extends State<CreateVideoScreen> {
   final List<String> upload = [Strings.reel, Strings.video, Strings.post];
+
+  int selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +26,8 @@ class CreateVideoScreen extends StatelessWidget {
               children: [
                 // Fixed header row
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.toScale,
                   ),
                   color: Colors.black,
                   child: Row(
@@ -43,7 +50,7 @@ class CreateVideoScreen extends StatelessWidget {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: EdgeInsets.all(10.toScale),
                       child: Column(
                         children: [
                           Row(
@@ -73,28 +80,36 @@ class CreateVideoScreen extends StatelessWidget {
                             height: Scale.screenHeight * 0.015,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(upload.length, (index) {
-                              return InkWell(
-                                onTap: () {
-                                  // Handle tap for each item
-                                },
-                                child: Container(
-                                  width: 100,
-                                  height: 40,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[800],
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    upload[index],
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: List.generate(upload.length, (index) {
+                                bool isSelected = index == selectedIndex;
+                                return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedIndex = index;
+                                      });
+                                    },
+                                    child: Container(
+                                      width: Scale.screenWidth * 0.3,
+                                      height: Scale.screenHeight * 0.05,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? Colors.white
+                                            : Colors.grey[800],
+                                        borderRadius:
+                                            BorderRadius.circular(8.toScale),
+                                      ),
+                                      child: Text(
+                                        upload[index],
+                                        style: TextStyle(
+                                          color: isSelected
+                                              ? Colors.black
+                                              : Colors.white,
+                                        ),
+                                      ),
+                                    ));
+                              })),
                           SizedBox(
                             height: Scale.screenHeight * 0.012,
                           ),
@@ -109,7 +124,8 @@ class CreateVideoScreen extends StatelessWidget {
                                 width: Scale.screenWidth * 0.11,
                                 height: Scale.screenHeight * 0.05,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius:
+                                      BorderRadius.circular(20.toScale),
                                   image: const DecorationImage(
                                     image: AssetImage(AppIcons.reel2),
                                     fit: BoxFit.cover,

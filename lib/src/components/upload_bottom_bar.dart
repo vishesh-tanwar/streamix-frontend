@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:project/src/assets/strings.dart';
+import 'package:project/src/utils/scale.dart';
 
 class UploadBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      padding:
+          EdgeInsets.symmetric(vertical: 10.toScale, horizontal: 15.toScale),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -13,18 +16,21 @@ class UploadBottomBar extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 75, 75, 75),
-                minimumSize: Size(160, 40)),
+                minimumSize:
+                    Size(Scale.screenWidth * 0.45, Scale.screenHeight * 0.05)),
             child: const Text(
-              "Save draft",
+              Strings.saveDraft,
               style: TextStyle(color: Colors.white),
             ),
           ),
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, minimumSize: Size(160, 40)),
+                backgroundColor: Colors.white,
+                minimumSize:
+                    Size(Scale.screenWidth * 0.45, Scale.screenHeight * 0.05)),
             child: const Text(
-              "Upload Short",
+              Strings.uploadShort,
               style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
             ),
           ),
