@@ -36,7 +36,7 @@ class Strings {
   // reels
   static const String reelTitle = "i am coming home ";
   static const String reel2Title =
-      "wait for the end !! our people doing a lot to save the nature";
+      "wait for the end !! our people doing a lot to save the nature hell yes we can do it !!";
   static const String reel3Title = "the dog mom who raised the tiger #love";
   static const String reel4Title =
       "day 447: doing push ups to push my limit !! #hustle";

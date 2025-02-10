@@ -23,7 +23,7 @@ class _BottomBarState extends State<BottomBar> {
       showBackButton: false,
     ),
     CreateVideoScreen(),
-    SubscriptionScreen(),
+    GoogleSignInButton(),
     ProfileScreen()
   ];
 
