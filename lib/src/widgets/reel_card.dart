@@ -26,7 +26,7 @@ class ReelCard extends StatelessWidget {
           );
         },
         child: Container(
-          width: Scale.screenWidth * 0.47,
+          width: Scale.screenWidth * 0.48,
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 0, 0, 0),
             borderRadius: BorderRadius.circular(10),
@@ -64,7 +64,7 @@ class ReelCard extends StatelessWidget {
                   ),
                   Positioned(
                       top: 1,
-                      left: 129.toScale,
+                      left: Scale.screenWidth * 0.47 * 0.75,
                       child: IconButton(
                         icon: Icon(
                           Icons.more_vert,

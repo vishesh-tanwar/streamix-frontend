@@ -32,12 +32,16 @@ class _ShortsScreenState extends State<ShortsScreen> {
                 _buildOverlayControls(),
                 _buildTopBar(),
                 Positioned(
-                  top: widget.showBackButton ? 650.toScale : 600.toScale,
+                  top: widget.showBackButton
+                      ? Scale.screenHeight * 0.8
+                      : Scale.screenHeight * 0.75,
                   left: 12.toScale,
                   child: _buildChannelInfo(reelData[index]),
                 ),
                 Positioned(
-                  top: widget.showBackButton ? 700.toScale : 645.toScale,
+                  top: widget.showBackButton
+                      ? Scale.screenHeight * 0.85
+                      : Scale.screenHeight * 0.8,
                   child: _buildDescription(reelData[index]),
                 ),
               ],

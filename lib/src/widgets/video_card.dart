@@ -35,8 +35,8 @@ class VideoCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Positioned(
-                top: 174.toScale,
-                left: 320.toScale,
+                top: Scale.screenHeight * 0.256 * 0.8,
+                left: Scale.screenWidth * 0.85,
                 child: Container(
                   width: Scale.screenWidth * 0.1,
                   height: Scale.screenHeight * 0.02,

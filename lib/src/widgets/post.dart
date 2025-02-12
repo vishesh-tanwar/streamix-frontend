@@ -23,48 +23,70 @@ class PostCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircleAvatar(
-                backgroundImage: AssetImage(posts.logo),
-                radius: Scale.screenHeight * 0.025,
-              ),
-              SizedBox(width: Scale.screenWidth * 0.027),
-              Text(
-                posts.name,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(width: Scale.screenWidth * 0.18),
-                Container(
-                  margin: EdgeInsets.all(4.toScale),
-                  padding: EdgeInsets.all(2.toScale),
-                  width: Scale.screenWidth * 0.19,
-                  height: Scale.screenHeight * 0.04,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromARGB(255, 42, 42, 42)
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage(posts.logo),
+                    radius: Scale.screenHeight * 0.025,
                   ),
-                  child: Center(child: Text(Strings.subscribe,style: TextStyle(color: Colors.white,fontSize: 11),)),
-                ) ,
-              IconButton(
-                icon : Icon(AppIcons.threeDots,color: Colors.white,),
-                onPressed: () {
-                  showModalBottomSheet(
+                  SizedBox(width: Scale.screenWidth * 0.027),
+                  Text(
+                    posts.name,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(4.toScale),
+                    padding: EdgeInsets.all(2.toScale),
+                    width: Scale.screenWidth * 0.19,
+                    height: Scale.screenHeight * 0.04,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color.fromARGB(255, 42, 42, 42)),
+                    child: Center(
+                        child: Text(
+                      Strings.subscribe,
+                      style: TextStyle(color: Colors.white, fontSize: 11),
+                    )),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      AppIcons.threeDots,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
                         context: context,
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
                         builder: (BuildContext context) {
                           return BottomDrawer(
-                            icons: [AppIcons.flag,AppIcons.banned,AppIcons.banned],
-                            texts: [Strings.report,Strings.notInterested,Strings.dontRecommend],
+                            icons: [
+                              AppIcons.flag,
+                              AppIcons.banned,
+                              AppIcons.banned
+                            ],
+                            texts: [
+                              Strings.report,
+                              Strings.notInterested,
+                              Strings.dontRecommend
+                            ],
                           );
                         },
                       );
-                },
-              )
+                    },
+                  )
+                ],
+              ),
             ],
           ),
           SizedBox(height: Scale.screenHeight * 0.012),
@@ -82,9 +104,9 @@ class PostCard extends StatelessWidget {
           if (posts.images.isNotEmpty)
             Container(
               height: Scale.screenHeight * 0.42,
-              width: Scale.screenWidth ,
+              width: Scale.screenWidth,
               color: Colors.black,
-              child: ImageCarousel(images : posts.images),
+              child: ImageCarousel(images: posts.images),
             ),
 
           // Likes and Comments Row
@@ -100,8 +122,14 @@ class PostCard extends StatelessWidget {
                     "${posts.likes} Likes",
                     style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
-                  SizedBox(width: Scale.screenWidth * 0.04,),
-                  const Icon(AppIcons.thumbDown, color: Colors.white, size: 20,),
+                  SizedBox(
+                    width: Scale.screenWidth * 0.04,
+                  ),
+                  const Icon(
+                    AppIcons.thumbDown,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ],
               ),
               Row(

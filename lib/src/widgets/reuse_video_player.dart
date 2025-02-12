@@ -21,11 +21,13 @@ class _ReusableVideoPlayerState extends State<ReusableVideoPlayer> {
   void initState() {
     super.initState();
     _videoController =
-        VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
-          ..initialize().then((_) {
-            setState(() {});
-            _videoController.play();
-          });
+        VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
+    _videoController.addListener(() {
+      setState(() {});
+    });
+    _videoController.initialize().then((_) => setState(() {}));
+
+    _videoController.play();
   }
 
   @override
