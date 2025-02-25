@@ -40,7 +40,7 @@ List<Video> homeData = [
     title: 'Dart Programming',
     duration: '15:45',
     link:
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     channelName: 'CodeWithDart',
     views: '2M',
     uploadDate: '2025-01-19',
@@ -51,7 +51,8 @@ List<Video> homeData = [
     thumbnail: AppIcons.moon,
     title: 'Flutter Tutorial',
     duration: '10:30',
-    link: 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+    link:
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
     channelName: 'FlutterDev',
     views: '1M',
     uploadDate: '2025-01-20',
@@ -74,7 +75,8 @@ List<Video> homeData = [
     thumbnail: AppIcons.moon,
     title: 'Flutter Tutorial',
     duration: '10:30',
-    link: 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+    link:
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
     channelName: 'FlutterDev',
     views: '1M',
     uploadDate: '2025-01-20',

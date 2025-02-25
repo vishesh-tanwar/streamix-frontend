@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
-import 'package:project/src/components/upload_body.dart';
-import 'package:project/src/components/upload_bottom_bar.dart';
+import 'package:project/src/providers/create_video_provider.dart';
+import 'package:project/src/providers/user_provider.dart';
 import 'package:project/src/utils/scale.dart';
 
-class CreateVideoScreen extends StatefulWidget {
-  @override
-  State<CreateVideoScreen> createState() => _CreateVideoScreenState();
-}
+class CreateVideoScreen extends ConsumerWidget {
+  CreateVideoScreen({super.key});
 
-class _CreateVideoScreenState extends State<CreateVideoScreen> {
   final List<String> upload = [Strings.reel, Strings.video, Strings.post];
 
-  int selectedIndex = -1;
+  final List<IconData> logo = [
+    AppIcons.thumbnail,
+    AppIcons.descriptionLine,
+  ];
+
+  final List<String> label = [
+    Strings.thumbnail,
+    Strings.addDescription,
+  ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final uploadState = ref.watch(uploadProvider);
+    final uploadNotifier = ref.read(uploadProvider.notifier);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -26,27 +35,20 @@ class _CreateVideoScreenState extends State<CreateVideoScreen> {
               children: [
                 // Fixed header row
                 Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.toScale,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 10.toScale),
                   color: Colors.black,
                   child: Row(
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: const Icon(
-                          AppIcons.arrowBack,
-                          color: Colors.white,
-                        ),
+                        icon:
+                            const Icon(AppIcons.arrowBack, color: Colors.white),
                       ),
-                      const Text(
-                        Strings.addDetails,
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
+                      const Text(Strings.addDetails,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
                     ],
                   ),
                 ),
-                // Scrollable content
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -56,38 +58,73 @@ class _CreateVideoScreenState extends State<CreateVideoScreen> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                height: Scale.screenHeight * 0.18,
-                                width: Scale.screenWidth * 0.3,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color:
-                                      const Color.fromARGB(255, 190, 190, 190),
+                              InkWell(
+                                onTap: uploadNotifier.pickVideo,
+                                child: Container(
+                                  height: Scale.screenHeight * 0.18,
+                                  width: Scale.screenWidth * 0.3,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: const Color.fromARGB(
+                                        255, 190, 190, 190),
+                                  ),
+                                  child: uploadState.videoData != null
+                                      ? Center(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Text("Uploaded"),
+                                          ),
+                                        )
+                                      : const Icon(Icons.upload,
+                                          color: Colors.white, size: 40),
                                 ),
                               ),
                               SizedBox(width: Scale.screenWidth * 0.03),
-                              const Expanded(
-                                child: Text(
-                                  Strings.captionVideo,
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 116, 114, 114),
+                              Expanded(
+                                child: TextField(
+                                  controller: uploadNotifier.titleController
+                                    ..text = uploadState.title,
+                                  onChanged: (value) {
+                                    uploadNotifier.addTitle(value);
+                                  },
+                                  maxLines: 4,
+                                  style: const TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                    hintText: "Enter Title...",
+                                    hintStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 136, 136, 136)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide:
+                                          const BorderSide(color: Colors.white),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide:
+                                          const BorderSide(color: Colors.blue),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
+                                    ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: Scale.screenHeight * 0.015,
-                          ),
+                          SizedBox(height: Scale.screenHeight * 0.026),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: List.generate(upload.length, (index) {
-                                bool isSelected = index == selectedIndex;
+                                bool isSelected =
+                                    index == uploadState.selectedIndex;
                                 return InkWell(
                                     onTap: () {
-                                      setState(() {
-                                        selectedIndex = index;
-                                      });
+                                      uploadNotifier.selectType(
+                                          index, upload[index]);
                                     },
                                     child: Container(
                                       width: Scale.screenWidth * 0.3,
@@ -110,14 +147,7 @@ class _CreateVideoScreenState extends State<CreateVideoScreen> {
                                       ),
                                     ));
                               })),
-                          SizedBox(
-                            height: Scale.screenHeight * 0.012,
-                          ),
-                          const Divider(
-                            color: Color.fromARGB(255, 54, 54, 54),
-                            thickness: 2,
-                          ),
-                          SizedBox(height: Scale.screenHeight * 0.012),
+                          SizedBox(height: Scale.screenHeight * 0.026),
                           Row(
                             children: [
                               Container(
@@ -145,7 +175,79 @@ class _CreateVideoScreenState extends State<CreateVideoScreen> {
                             ],
                           ),
                           SizedBox(height: Scale.screenHeight * 0.012),
-                          UploadBody(),
+                          Column(
+                            children: [
+                              // Pick Thumbnail ListTile
+                              Padding(
+                                padding:
+                                    EdgeInsets.symmetric(vertical: 15.toScale),
+                                child: InkWell(
+                                  onTap: uploadNotifier.pickThumbnail,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(AppIcons.thumbnail,
+                                              color: Colors.white),
+                                          SizedBox(
+                                              width: Scale.screenWidth * 0.02),
+                                          Text(Strings.thumbnail,
+                                              style: const TextStyle(
+                                                  color: Colors.white)),
+                                        ],
+                                      ),
+                                      const Icon(Icons.arrow_forward_ios,
+                                          color: Colors.white),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              // Add Description ListTile
+                              TextField(
+                                controller: uploadNotifier.descriptionController
+                                  ..text = uploadState.description,
+                                onChanged: (value) {
+                                  uploadNotifier.addDescription(value);
+                                },
+                                maxLines: 10,
+                                style: const TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  hintText: "Enter description...",
+                                  hintStyle: TextStyle(
+                                      color: const Color.fromARGB(
+                                          255, 136, 136, 136)),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide:
+                                        const BorderSide(color: Colors.white),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide:
+                                        const BorderSide(color: Colors.blue),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide:
+                                        const BorderSide(color: Colors.grey),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: Scale.screenHeight * 0.015),
+                          ElevatedButton(
+                            onPressed: uploadState.isUploading
+                                ? null
+                                : () => uploadNotifier.uploadVideo(context),
+                            child: uploadState.isUploading
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white)
+                                : const Text("Upload Video"),
+                          ),
                         ],
                       ),
                     ),
@@ -153,7 +255,6 @@ class _CreateVideoScreenState extends State<CreateVideoScreen> {
                 ),
               ],
             ),
-            Positioned(bottom: 0, left: 0, right: 0, child: UploadBottomBar()),
           ],
         ),
       ),

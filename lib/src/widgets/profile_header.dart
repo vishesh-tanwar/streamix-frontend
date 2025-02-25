@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/icons.dart';
+import 'package:project/src/providers/user_provider.dart';
 import 'package:project/src/utils/scale.dart';
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeader extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -14,8 +17,9 @@ class ProfileHeader extends StatelessWidget {
             height: Scale.screenHeight * 0.08,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30.toScale),
-              image: const DecorationImage(
-                image: AssetImage(AppIcons.reel2),
+              image: DecorationImage(
+                // image: AssetImage(AppIcons.reel2),
+                image: NetworkImage(user.photo),
                 fit: BoxFit.cover,
               ),
             ),
@@ -24,9 +28,9 @@ class ProfileHeader extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Vilgax",
-                style: TextStyle(
+              Text(
+                user.name,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -34,8 +38,8 @@ class ProfileHeader extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Text(
-                    "@vilgax1404  •  ",
+                  Text(
+                    user.handle,
                     style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   GestureDetector(

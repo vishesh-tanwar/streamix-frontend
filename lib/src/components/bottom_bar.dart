@@ -43,7 +43,7 @@ class _BottomBarState extends State<BottomBar> {
     AppIcons.youFill,
   ];
 
-  final List<String> labels = ['Home', 'Shorts', '', 'Subscriptions', 'You'];
+  final List<String> labels = ['Home', 'Shorts', '', 'Sign In', 'You'];
 
   @override
   void initState() {

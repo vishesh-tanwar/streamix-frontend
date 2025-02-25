@@ -1,70 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:project/src/models/user_model.dart';
+import 'package:project/src/providers/user_provider.dart';
 
-class GoogleSignInButton extends StatefulWidget {
+class GoogleSignInButton extends ConsumerWidget {
+  const GoogleSignInButton({super.key});
   @override
-  _GoogleSignInButtonState createState() => _GoogleSignInButtonState();
-}
-
-class _GoogleSignInButtonState extends State<GoogleSignInButton> {
-  GoogleSignIn _googleSignIn = GoogleSignIn();
-  GoogleSignInAccount? _currentUser;
-
-  @override
-  void initState() {
-    super.initState();
-    const List<String> scopes = <String>[
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ];
-
-    _googleSignIn = GoogleSignIn(
-      // Optional clientId
-      // clientId: 'your-client_id.apps.googleusercontent.com',
-      scopes: scopes,
-    );
-  }
-
-  Future<void> _handleSignIn() async {
-    try {
-      final account = await _googleSignIn.signIn();
-      print("logging --------------> $account");
-      setState(() {
-        _currentUser = account;
-      });
-    } catch (error) {
-      print("Sign-in failed: $error");
-    }
-  }
-
-  Future<void> _handleSignOut() async {
-    await _googleSignIn.signOut();
-    setState(() {
-      _currentUser = null;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _currentUser == null
-        ? Center(
-            child: ElevatedButton.icon(
-              onPressed: _handleSignIn,
-              icon: Icon(Icons.login),
-              label: Text("Sign in with Google"),
-            ),
-          )
-        : Column(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userNotifier = ref.read(userProvider.notifier);
+    final User = ref.watch(userProvider);
+    return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 20, 20, 20),
+        body: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Signed in as: ${_currentUser?.displayName}"),
+              userNotifier.currentUser != null
+                  ? Text(
+                      "Signed in as: ${User.name} user id : ${User.id}",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  : Text(""),
               ElevatedButton.icon(
-                onPressed: _handleSignOut,
+                onPressed: userNotifier.currentUser != null
+                    ? userNotifier.handleSignOut
+                    : userNotifier.handleSignIn,
                 icon: Icon(Icons.logout),
-                label: Text("Sign out"),
+                label: userNotifier.currentUser == null
+                    ? Text("Sign in with Google")
+                    : Text("Sign out"),
               ),
             ],
-          );
+          ),
+        ));
   }
 }

@@ -1,34 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project/src/providers/carousal_provider.dart';
 
-class ImageCarousel extends StatefulWidget {
+class ImageCarousel extends ConsumerWidget {
   final List<String> images;
 
   const ImageCarousel({super.key, required this.images});
 
   @override
-  State<ImageCarousel> createState() => _ImageCarouselState();
-}
-
-class _ImageCarouselState extends State<ImageCarousel> {
-  int currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentIndex = ref.watch(carousalProvider);
     return Stack(
       children: [
         PageView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: widget.images.length,
+          itemCount: images.length,
           onPageChanged: (index) {
-            setState(() {
-              currentIndex = index;
-            });
+            ref.read(carousalProvider.notifier).updateIndex(index);
           },
           itemBuilder: (context, index) {
             return Container(
               margin: const EdgeInsets.all(6),
               child: Image.asset(
-                widget.images[index],
+                images[index],
                 fit: BoxFit.cover,
               ),
             );
@@ -44,7 +38,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Text(
-              '${currentIndex + 1}/${widget.images.length}',
+              '${currentIndex + 1}/${images.length}',
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,

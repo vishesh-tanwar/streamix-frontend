@@ -20,6 +20,8 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _HomeScreenState extends State<HomeScreen> {
   var category = [
     Strings.all,
@@ -43,60 +45,59 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       drawer: MyDrawer(),
       body: Container(
         color: Colors.black,
         child: SafeArea(
-          child: Builder(
-            builder: (BuildContext scaffoldContext) {
-              return CustomScrollView(
-                slivers: [
-                  CustomSliverAppBar(
-                    categories: category,
-                    onDrawerTap: () => openDrawer(scaffoldContext),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      color: Colors.black,
-                      child: Column(
-                        children: [
-                          const ShortsHeader(),
-                          SizedBox(
-                            height: Scale.screenHeight * 0.014,
-                          ),
-                          Wrap(
-                            spacing: 6,
-                            runSpacing: 6,
-                            children: [
-                              ...List.generate(
-                                  4, (i) => ReelCard(reels: reelData[i])),
-                            ],
-                          ),
-                          PostCard(posts: postData[0]),
-                          ...List.generate(
-                            homeData.length,
-                            (i) => GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        WatchVideoScreen(video: homeData[i]),
-                                  ),
-                                );
-                              },
-                              child: VideoCard(video: homeData[i]),
+            child: CustomScrollView(
+          slivers: [
+            CustomSliverAppBar(
+              categories: category,
+              onDrawerTap: () => _scaffoldKey.currentState?.openDrawer(),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                color: Colors.black,
+                child: Column(
+                  children: [
+                    const ShortsHeader(),
+                    SizedBox(
+                      height: Scale.screenHeight * 0.014,
+                    ),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: [
+                        ...List.generate(
+                            4, (i) => ReelCard(reels: reelData[i])),
+                      ],
+                    ),
+                    PostCard(posts: postData[0]),
+                    ...List.generate(
+                      homeData.length,
+                      (i) => GestureDetector(
+                        onLongPress: () {
+                          print("on long press");
+                        },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  WatchVideoScreen(video: homeData[i]),
                             ),
-                          ),
-                        ],
+                          );
+                        },
+                        child: VideoCard(video: homeData[i]),
                       ),
                     ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        )),
       ),
     );
   }

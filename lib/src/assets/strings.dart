@@ -81,9 +81,9 @@ class Strings {
   static const String helpAndFeedback = 'Help and Feedback';
 
   // upload video
-  static const String reel = 'Reel';
-  static const String video = "Video";
-  static const String post = 'Post';
+  static const String reel = 'reel';
+  static const String video = "video";
+  static const String post = 'post';
   static const String addDetails = "Add details";
   static const String captionVideo = "Caption your video";
   static const String remix = "Remix";

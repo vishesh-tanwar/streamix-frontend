@@ -5,13 +5,11 @@ import 'package:project/src/utils/scale.dart';
 
 class UploadBody extends StatelessWidget {
   final List<IconData> logo = [
-    AppIcons.visibility,
     AppIcons.thumbnail,
     AppIcons.descriptionLine,
   ];
 
   final List<String> label = [
-    Strings.visibility,
     Strings.thumbnail,
     Strings.addDescription,
   ];
