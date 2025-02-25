@@ -25,6 +25,7 @@ class CreateVideoScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final uploadState = ref.watch(uploadProvider);
     final uploadNotifier = ref.read(uploadProvider.notifier);
+    final user = ref.watch(userProvider);
 
     return SafeArea(
       child: Scaffold(
@@ -148,32 +149,42 @@ class CreateVideoScreen extends ConsumerWidget {
                                     ));
                               })),
                           SizedBox(height: Scale.screenHeight * 0.026),
-                          Row(
-                            children: [
-                              Container(
-                                width: Scale.screenWidth * 0.11,
-                                height: Scale.screenHeight * 0.05,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(20.toScale),
-                                  image: const DecorationImage(
-                                    image: AssetImage(AppIcons.reel2),
-                                    fit: BoxFit.cover,
-                                  ),
+                          user.isLoggedIn
+                              ? Row(
+                                  children: [
+                                    Container(
+                                      width: Scale.screenWidth * 0.11,
+                                      height: Scale.screenHeight * 0.05,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20.toScale),
+                                        image: DecorationImage(
+                                          image: NetworkImage(user.photo),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: Scale.screenWidth * 0.016),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(user.name,
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                        Text(user.handle,
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              : Text(
+                                  "Please Log In to Upload Video",
+                                  style: TextStyle(
+                                      color:
+                                          const Color.fromARGB(255, 255, 3, 3)),
                                 ),
-                              ),
-                              SizedBox(width: Scale.screenWidth * 0.016),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text('Vilgax',
-                                      style: TextStyle(color: Colors.white)),
-                                  Text("@vilgax1404",
-                                      style: TextStyle(color: Colors.white)),
-                                ],
-                              ),
-                            ],
-                          ),
                           SizedBox(height: Scale.screenHeight * 0.012),
                           Column(
                             children: [
@@ -239,15 +250,15 @@ class CreateVideoScreen extends ConsumerWidget {
                             ],
                           ),
                           SizedBox(height: Scale.screenHeight * 0.015),
-                          ElevatedButton(
-                            onPressed: uploadState.isUploading
-                                ? null
-                                : () => uploadNotifier.uploadVideo(context),
-                            child: uploadState.isUploading
-                                ? const CircularProgressIndicator(
-                                    color: Colors.white)
-                                : const Text("Upload Video"),
-                          ),
+                          if (user.isLoggedIn)
+                            ElevatedButton(
+                              onPressed: () =>
+                                  uploadNotifier.uploadVideo(context),
+                              child: uploadState.isUploading
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white)
+                                  : const Text("Upload Video"),
+                            ),
                         ],
                       ),
                     ),
