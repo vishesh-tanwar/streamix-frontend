@@ -126,8 +126,7 @@ class UploadNotifier extends StateNotifier<UploadModel> {
 
       request.headers['Authorization'] = user.token;
 
-      request.fields['mime_type'] = mimeType;
-      request.fields['userid'] = user.id.toString();
+      request.fields['id'] = user.id.toString();
       request.fields['title'] = state.title;
       request.fields['description'] = state.description;
       request.fields['type'] = state.type;

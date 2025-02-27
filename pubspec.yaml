@@ -44,6 +44,8 @@ dependencies:
   open_file: ^3.5.10
   path_provider: ^2.1.5
   mime: ^2.0.0
+  dio: ^5.8.0+1
+  intl: ^0.20.2
   
   
 dev_dependencies:

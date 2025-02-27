@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
 import 'package:project/src/components/bottom_drawer.dart';
+import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/utils/scale.dart';
-import '../models/video.dart';
 
 class VideoCard extends StatelessWidget {
-  final Video video;
+  final GetVideoModel video;
 
   const VideoCard({
     Key? key,
@@ -28,7 +28,7 @@ class VideoCard extends StatelessWidget {
           // Video Thumbnail
           Stack(
             children: [
-              Image.asset(
+              Image.network(
                 video.thumbnail,
                 width: Scale.screenWidth,
                 height: Scale.screenHeight * 0.256,
@@ -46,7 +46,7 @@ class VideoCard extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      video.duration,
+                      "10:30",
                       style: TextStyle(color: Colors.white, fontSize: 11),
                     ),
                   ),
@@ -61,8 +61,8 @@ class VideoCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  video.thumbnail,
+                child: Image.network(
+                  video.photo,
                   width: Scale.screenWidth * 0.1,
                   height: Scale.screenHeight * 0.05,
                   fit: BoxFit.cover,
@@ -85,7 +85,7 @@ class VideoCard extends StatelessWidget {
                     ),
                     SizedBox(height: Scale.screenHeight * 0.004),
                     Text(
-                      '${video.channelName} • ${video.views} views • ${video.uploadDate}',
+                      '${video.name} • ${video.uploadedAt}',
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 12,

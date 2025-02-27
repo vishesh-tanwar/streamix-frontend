@@ -251,14 +251,14 @@ class CreateVideoScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: Scale.screenHeight * 0.015),
                           if (user.isLoggedIn)
-                            ElevatedButton(
-                              onPressed: () =>
-                                  uploadNotifier.uploadVideo(context),
-                              child: uploadState.isUploading
-                                  ? const CircularProgressIndicator(
-                                      color: Colors.white)
-                                  : const Text("Upload Video"),
-                            ),
+                            uploadState.isUploading
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white)
+                                : ElevatedButton(
+                                    onPressed: () =>
+                                        uploadNotifier.uploadVideo(context),
+                                    child: const Text("Upload Video"),
+                                  ),
                         ],
                       ),
                     ),

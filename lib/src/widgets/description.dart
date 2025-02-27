@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/models/video.dart';
+import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/utils/scale.dart';
 import 'package:project/src/assets/strings.dart';
 
 class Description extends StatelessWidget {
-  final Video video;
+  final GetVideoModel video;
 
   const Description({super.key, required this.video});
 
@@ -61,8 +62,8 @@ class Description extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          const Text(
-                            "1.2k",
+                          Text(
+                            video.totalLikes,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -82,7 +83,7 @@ class Description extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            video.views,
+                            "10 million",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -102,7 +103,7 @@ class Description extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            video.uploadDate,
+                            video.uploadedAt as String,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,

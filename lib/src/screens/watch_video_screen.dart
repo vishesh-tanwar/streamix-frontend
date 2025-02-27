@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/components/bottom_bar.dart';
 import 'package:project/src/components/watch_video_comment.dart';
 import 'package:project/src/components/watch_video_reel.dart';
 import 'package:project/src/components/watch_video_slideBar.dart';
-import 'package:project/src/models/video.dart';
+// import 'package:project/src/models/video.dart';
+import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/widgets/description.dart';
 import 'package:project/src/widgets/reuse_video_player.dart';
 import 'package:project/src/utils/scale.dart';
@@ -11,40 +13,47 @@ import 'package:project/src/widgets/video_card.dart';
 import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
 
-class WatchVideoScreen extends StatefulWidget {
-  final Video video;
+final List<String> barText = [
+  Strings.share,
+  Strings.remix,
+  Strings.thanks,
+  Strings.stopAds,
+  Strings.clip,
+  Strings.save,
+  Strings.report
+];
+
+final List<IconData> barIcon = [
+  AppIcons.share,
+  AppIcons.remix,
+  AppIcons.money,
+  AppIcons.stopCircle,
+  AppIcons.clip,
+  AppIcons.save,
+  AppIcons.flag
+];
+
+class WatchVideoScreen extends ConsumerStatefulWidget {
+  final GetVideoModel video;
 
   WatchVideoScreen({super.key, required this.video});
 
   @override
-  State<WatchVideoScreen> createState() => _WatchVideoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      WatchVideoScreenState();
 }
 
-class _WatchVideoScreenState extends State<WatchVideoScreen> {
-  // bool _showDescription = false ;
-
-  final List<String> barText = [
-    Strings.share,
-    Strings.remix,
-    Strings.thanks,
-    Strings.stopAds,
-    Strings.clip,
-    Strings.save,
-    Strings.report
-  ];
-
-  final List<IconData> barIcon = [
-    AppIcons.share,
-    AppIcons.remix,
-    AppIcons.money,
-    AppIcons.stopCircle,
-    AppIcons.clip,
-    AppIcons.save,
-    AppIcons.flag
-  ];
+class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => ref.read(getVideoProvider.notifier).fetchVideos());
+  }
 
   @override
   Widget build(BuildContext context) {
+    final videoData = ref.watch(getVideoProvider);
+
     return PopScope(
         canPop: false,
         onPopInvokedWithResult: (b, r) async {
@@ -65,7 +74,7 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
                     Container(
                       width: double.infinity,
                       height: Scale.screenHeight * 0.3,
-                      child: ReusableVideoPlayer(videoUrl: widget.video.link),
+                      child: ReusableVideoPlayer(videoUrl: widget.video.video),
                     ),
                     SizedBox(
                       height: Scale.screenHeight * 0.01,
@@ -106,7 +115,7 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
                                     Row(
                                       children: [
                                         Text(
-                                          '${widget.video.views} ${widget.video.uploadDate}  ',
+                                          '${widget.video.uploadedAt}',
                                           style: const TextStyle(
                                               color: Colors.grey, fontSize: 12),
                                         ),
@@ -134,15 +143,15 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           image: DecorationImage(
-                                            image: AssetImage(
-                                                widget.video.thumbnail),
+                                            image: NetworkImage(
+                                                widget.video.photo),
                                             fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
                                       SizedBox(width: Scale.screenWidth * 0.02),
                                       Text(
-                                        widget.video.channelName,
+                                        widget.video.name,
                                         style: const TextStyle(
                                             color: Colors.white),
                                       )
@@ -170,18 +179,18 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
                           ),
                           WatchVideoReel(),
                           ...List.generate(
-                            homeData.length,
+                            videoData.length,
                             (i) => GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        WatchVideoScreen(video: homeData[i]),
+                                        WatchVideoScreen(video: videoData[i]),
                                   ),
                                 );
                               },
-                              child: VideoCard(video: homeData[i]),
+                              child: VideoCard(video: videoData[i]),
                             ),
                           ),
                         ],
