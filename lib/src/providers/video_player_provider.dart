@@ -15,12 +15,14 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
 
   Future<void> _initialize(String videoUrl) async {
     // Dispose of the previous video before initializing a new one
-    if (state.videoController != null) {
+    if (state.videoController != null &&
+        state.videoController!.value.isInitialized) {
       await state.videoController?.pause();
       await state.videoController?.dispose();
     }
 
-    final controller = VideoPlayerController.networkUrl(Uri.parse(videoUrl),
+    final controller = VideoPlayerController.networkUrl(
+        Uri.parse('http://192.168.1.30:3000$videoUrl'),
         videoPlayerOptions: VideoPlayerOptions(
           mixWithOthers: false,
           allowBackgroundPlayback: false,
@@ -33,8 +35,6 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
 
     state = VideoPlayerState(
       videoController: controller,
-      // controlIcon: Icons.pause, // Reset icon to "pause" since it's playing
-      // showControlIcon: false, // Hide icon initially
     );
   }
 

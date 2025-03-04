@@ -27,19 +27,19 @@ List<Reels> reelData = [
       title: Strings.reel2Title,
       channel: "@algoIndia",
       video:
-          "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4"),
+          "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4"),
   Reels(
       thumbnail: AppIcons.reel3,
       title: Strings.reel3Title,
       channel: "@natureBizzare",
       video:
-          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
+          'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
   Reels(
       thumbnail: AppIcons.reel4,
       title: Strings.reel4Title,
       channel: "@yummySnack",
       video:
-          'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
+          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
   Reels(
       thumbnail: AppIcons.reel4,
       title: Strings.reel4Title,

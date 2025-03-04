@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
+import 'package:project/src/models/reels.dart';
 import 'package:project/src/screens/create_video_screen.dart';
 import 'package:project/src/screens/home_screen.dart';
 import 'package:project/src/screens/profile_screen.dart';
@@ -21,6 +22,7 @@ class _BottomBarState extends State<BottomBar> {
     HomeScreen(),
     ShortsScreen(
       showBackButton: false,
+      initialIndex: 0,
     ),
     CreateVideoScreen(),
     GoogleSignInButton(),

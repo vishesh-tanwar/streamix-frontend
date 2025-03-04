@@ -50,7 +50,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userNotifier = ref.read(userProvider.notifier);
-    // final userModel = ref.watch(userProvider);
+
     return userNotifier.currentUser != null
         ? Scaffold(
             backgroundColor: Colors.black,
@@ -81,7 +81,7 @@ class ProfileScreen extends ConsumerWidget {
                 children: [
                   ProfileHeader(),
                   HorizontalButtonList(barText: barText, barIcon: barIcon),
-                  HistoryBar(historyItems: historyItems),
+                  HistoryBar(),
                   PlaylistBar(historyItems: historyItems),
                   ListSection(label: listLabel, icon: listIcon)
                 ],

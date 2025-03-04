@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
 import 'package:project/src/components/bottom_drawer.dart';
+import 'package:project/src/models/video.dart';
 import 'package:project/src/screens/shorts_screen.dart';
 import 'package:project/src/utils/scale.dart';
-import '../models/reels.dart';
+// import '../models/reels.dart';
 
 class ReelCard extends StatelessWidget {
-  final Reels reels;
+  final GetVideoModel reels;
+  final int index;
 
   const ReelCard({
     Key? key,
     required this.reels,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -19,11 +22,13 @@ class ReelCard extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ShortsScreen(showBackButton: true),
-            ),
-          );
+              context,
+              MaterialPageRoute(
+                builder: (context) => ShortsScreen(
+                    showBackButton: true,
+                    initialIndex: index // Pass the initial index),
+                    ),
+              ));
         },
         child: Container(
           width: Scale.screenWidth * 0.48,
@@ -39,8 +44,8 @@ class ReelCard extends StatelessWidget {
                   // Image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      reels.thumbnail,
+                    child: Image.network(
+                      'http://192.168.1.30:3000${reels.thumbnail}',
                       width: Scale.screenWidth * 0.46,
                       height: Scale.screenHeight * 0.323,
                       fit: BoxFit.cover,

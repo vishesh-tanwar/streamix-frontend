@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/icons.dart';
-import 'package:project/src/models/reels.dart';
+// import 'package:project/src/models/reels.dart';
+import 'package:project/src/providers/getreel_provider.dart';
 import 'package:project/src/utils/scale.dart';
 import 'package:project/src/widgets/reel_card.dart';
 import 'package:project/src/assets/strings.dart';
 
-class WatchVideoReel extends StatelessWidget {
+class WatchVideoReel extends ConsumerWidget {
+  const WatchVideoReel({super.key});
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final reelData = ref.watch(getReelsProvider);
     return Column(
       children: [
         Row(
@@ -44,7 +49,7 @@ class WatchVideoReel extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.all(2.toScale),
-                  child: ReelCard(reels: reelData[index]),
+                  child: ReelCard(reels: reelData[index], index: index),
                 );
               },
             ),

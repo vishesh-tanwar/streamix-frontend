@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:project/src/models/history_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/strings.dart';
+import 'package:project/src/providers/get_history_provider.dart';
 import 'package:project/src/utils/scale.dart';
 
-class HistoryBar extends StatelessWidget {
-  final List<HistoryData> historyItems;
+class HistoryBar extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => HistoryBarState();
+}
 
-  const HistoryBar({super.key, required this.historyItems});
+class HistoryBarState extends ConsumerState {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      ref.read(getHistoryProvider.notifier).fetchHistory();
+    }); // Fetch data once
+  }
+
   @override
   Widget build(BuildContext context) {
+    final historyItems = ref.watch(getHistoryProvider);
     return Container(
       margin: const EdgeInsets.all(12),
       child: Column(
@@ -64,8 +76,8 @@ class HistoryBar extends StatelessWidget {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              item.thumbnailUrl,
+                            child: Image.network(
+                              'http://192.168.1.30:3000${item.thumbnail}',
                               height: Scale.screenHeight * 0.09,
                               width: Scale.screenWidth * 0.36,
                               fit: BoxFit.cover,
@@ -82,7 +94,7 @@ class HistoryBar extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(5)),
                                 child: Center(
                                   child: Text(
-                                    item.duration,
+                                    "10:23",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 11),
                                   ),
@@ -101,7 +113,7 @@ class HistoryBar extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        item.channelName,
+                        item.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(

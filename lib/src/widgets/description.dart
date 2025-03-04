@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/models/video.dart';
-import 'package:project/src/providers/getvideo_provider.dart';
+// import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/utils/scale.dart';
 import 'package:project/src/assets/strings.dart';
 
@@ -63,7 +63,7 @@ class Description extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            video.totalLikes,
+                            '${video.totalLikes}',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -103,7 +103,7 @@ class Description extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            video.uploadedAt as String,
+                            video.uploadedAt,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,

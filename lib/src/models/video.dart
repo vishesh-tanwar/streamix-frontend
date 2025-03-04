@@ -1,168 +1,71 @@
-// import 'package:project/src/assets/icons.dart';
+import 'package:intl/intl.dart';
 
-// class Video {
-//   final String thumbnail;
-//   final String title;
-//   final String duration;
-//   final String link;
-//   final String channelName;
-//   final String views;
-//   final String uploadDate;
-//   final String description;
+class GetVideoModel {
+  final int videoId;
+  final int id;
+  final String video;
+  final String thumbnail;
+  final String title;
+  final String description;
+  final String type;
+  final int totalLikes;
+  final int totalDislikes;
+  final String uploadedAt;
+  final String photo;
+  final String name;
+  final String handle;
 
-//   Video(
-//       {required this.thumbnail,
-//       required this.title,
-//       required this.duration,
-//       required this.link,
-//       required this.channelName,
-//       required this.views,
-//       required this.uploadDate,
-//       required this.description});
-// }
+  GetVideoModel({
+    required this.videoId,
+    required this.id,
+    required this.video,
+    required this.thumbnail,
+    required this.title,
+    required this.description,
+    required this.type,
+    required this.totalLikes,
+    required this.totalDislikes,
+    required this.uploadedAt,
+    required this.photo,
+    required this.name,
+    required this.handle,
+  });
 
-// List<Video> homeData = [
-//   Video(
-//     thumbnail: AppIcons.ocean,
-//     title:
-//         'Flutter Tutorial - John XCena makes final royal rumble entrance of his career : Royal Rumble 2025',
-//     duration: '10:30',
-//     link:
-//         'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-//     channelName: 'FlutterDev',
-//     views: '1M',
-//     description:
-//         "Prostate cancer is the uncontrolled growth of cells in the prostate. It is often detected through blood tests for prostate-specific antigen, followed by a biopsy. Most prostate tumors (diagram pictured) cause no health problems, and are managed with surveillance. Dangerous tumors can be surgically removed or destroyed with radiation therapy. Those whose cancer spreads receive hormone therapy, targeted therapy, and eventually chemotherapy. Most tumors are confined to the prostate, and 99% of men survive ten years post-diagnosis. Those whose tumors have metastasized to distant body sites have a poorer prognosis; 30% to 40% are still alive five years after diagnosis. Each year 1.2 million men are diagnosed with prostate cancer and 350,000 die of the disease, making it the second-leading cause of cancer in men. Prostate tumors were first described in the mid-19th century. Hormone therapies were developed in the mid–20th century, resulting in Nobel Prizes for their developers Charles Huggins and Andrzej Schally. (Full article...)",
-//     uploadDate: '2025-01-20',
-//   ),
-//   Video(
-//     thumbnail: AppIcons.cameleon,
-//     title: 'Dart Programming',
-//     duration: '15:45',
-//     link:
-//         'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-//     channelName: 'CodeWithDart',
-//     views: '2M',
-//     uploadDate: '2025-01-19',
-//     description:
-//         "Prostate cancer is the uncontrolled growth of cells in the prostate. It is often detected through blood tests for prostate-specific antigen, followed by a biopsy. Most prostate tumors (diagram pictured) cause no health problems, and are managed with surveillance. Dangerous tumors can be surgically removed or destroyed with radiation therapy. Those whose cancer spreads receive hormone therapy, targeted therapy, and eventually chemotherapy. Most tumors are confined to the prostate, and 99% of men survive ten years post-diagnosis. Those whose tumors have metastasized to distant body sites have a poorer prognosis; 30% to 40% are still alive five years after diagnosis. Each year 1.2 million men are diagnosed with prostate cancer and 350,000 die of the disease, making it the second-leading cause of cancer in men. Prostate tumors were first described in the mid-19th century. Hormone therapies were developed in the mid–20th century, resulting in Nobel Prizes for their developers Charles Huggins and Andrzej Schally. (Full article...)",
-//   ),
-//   Video(
-//     thumbnail: AppIcons.moon,
-//     title: 'Flutter Tutorial',
-//     duration: '10:30',
-//     link:
-//         'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
-//     channelName: 'FlutterDev',
-//     views: '1M',
-//     uploadDate: '2025-01-20',
-//     description:
-//         "Prostate cancer is the uncontrolled growth of cells in the prostate. It is often detected through blood tests for prostate-specific antigen, followed by a biopsy. Most prostate tumors (diagram pictured) cause no health problems, and are managed with surveillance. Dangerous tumors can be surgically removed or destroyed with radiation therapy. Those whose cancer spreads receive hormone therapy, targeted therapy, and eventually chemotherapy. Most tumors are confined to the prostate, and 99% of men survive ten years post-diagnosis. Those whose tumors have metastasized to distant body sites have a poorer prognosis; 30% to 40% are still alive five years after diagnosis. Each year 1.2 million men are diagnosed with prostate cancer and 350,000 die of the disease, making it the second-leading cause of cancer in men. Prostate tumors were first described in the mid-19th century. Hormone therapies were developed in the mid–20th century, resulting in Nobel Prizes for their developers Charles Huggins and Andrzej Schally. (Full article...)",
-//   ),
-//   Video(
-//     thumbnail: AppIcons.ocean,
-//     title: 'Dart Programming',
-//     duration: '15:45',
-//     link:
-//         'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-//     channelName: 'CodeWithDart',
-//     views: '2M',
-//     uploadDate: '2025-01-19',
-//     description:
-//         "Prostate cancer is the uncontrolled growth of cells in the prostate. It is often detected through blood tests for prostate-specific antigen, followed by a biopsy. Most prostate tumors (diagram pictured) cause no health problems, and are managed with surveillance. Dangerous tumors can be surgically removed or destroyed with radiation therapy. Those whose cancer spreads receive hormone therapy, targeted therapy, and eventually chemotherapy. Most tumors are confined to the prostate, and 99% of men survive ten years post-diagnosis. Those whose tumors have metastasized to distant body sites have a poorer prognosis; 30% to 40% are still alive five years after diagnosis. Each year 1.2 million men are diagnosed with prostate cancer and 350,000 die of the disease, making it the second-leading cause of cancer in men. Prostate tumors were first described in the mid-19th century. Hormone therapies were developed in the mid–20th century, resulting in Nobel Prizes for their developers Charles Huggins and Andrzej Schally. (Full article...)",
-//   ),
-//   Video(
-//     thumbnail: AppIcons.moon,
-//     title: 'Flutter Tutorial',
-//     duration: '10:30',
-//     link:
-//         'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-//     channelName: 'FlutterDev',
-//     views: '1M',
-//     uploadDate: '2025-01-20',
-//     description:
-//         "Prostate cancer is the uncontrolled growth of cells in the prostate. It is often detected through blood tests for prostate-specific antigen, followed by a biopsy. Most prostate tumors (diagram pictured) cause no health problems, and are managed with surveillance. Dangerous tumors can be surgically removed or destroyed with radiation therapy. Those whose cancer spreads receive hormone therapy, targeted therapy, and eventually chemotherapy. Most tumors are confined to the prostate, and 99% of men survive ten years post-diagnosis. Those whose tumors have metastasized to distant body sites have a poorer prognosis; 30% to 40% are still alive five years after diagnosis. Each year 1.2 million men are diagnosed with prostate cancer and 350,000 die of the disease, making it the second-leading cause of cancer in men. Prostate tumors were first described in the mid-19th century. Hormone therapies were developed in the mid–20th century, resulting in Nobel Prizes for their developers Charles Huggins and Andrzej Schally. (Full article...)",
-//   ),
-//   Video(
-//     thumbnail: AppIcons.cameleon,
-//     title: 'Dart Programming',
-//     duration: '15:45',
-//     link:
-//         'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-//     channelName: 'CodeWithDart',
-//     views: '2M',
-//     uploadDate: '2025-01-19',
-//     description:
-//         "Prostate cancer is the uncontrolled growth of cells in the prostate. It is often detected through blood tests for prostate-specific antigen, followed by a biopsy. Most prostate tumors (diagram pictured) cause no health problems, and are managed with surveillance. Dangerous tumors can be surgically removed or destroyed with radiation therapy. Those whose cancer spreads receive hormone therapy, targeted therapy, and eventually chemotherapy. Most tumors are confined to the prostate, and 99% of men survive ten years post-diagnosis. Those whose tumors have metastasized to distant body sites have a poorer prognosis; 30% to 40% are still alive five years after diagnosis. Each year 1.2 million men are diagnosed with prostate cancer and 350,000 die of the disease, making it the second-leading cause of cancer in men. Prostate tumors were first described in the mid-19th century. Hormone therapies were developed in the mid–20th century, resulting in Nobel Prizes for their developers Charles Huggins and Andrzej Schally. (Full article...)",
-//   ),
-//   Video(
-//     thumbnail: AppIcons.ocean,
-//     title: 'Flutter Tutorial',
-//     duration: '10:30',
-//     link: 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-//     channelName: 'FlutterDev',
-//     views: '1M',
-//     uploadDate: '2025-01-20',
-//     description:
-//         "Prostate cancer is the uncontrolled growth of cells in the prostate. It is often detected through blood tests for prostate-specific antigen, followed by a biopsy. Most prostate tumors (diagram pictured) cause no health problems, and are managed with surveillance. Dangerous tumors can be surgically removed or destroyed with radiation therapy. Those whose cancer spreads receive hormone therapy, targeted therapy, and eventually chemotherapy. Most tumors are confined to the prostate, and 99% of men survive ten years post-diagnosis. Those whose tumors have metastasized to distant body sites have a poorer prognosis; 30% to 40% are still alive five years after diagnosis. Each year 1.2 million men are diagnosed with prostate cancer and 350,000 die of the disease, making it the second-leading cause of cancer in men. Prostate tumors were first described in the mid-19th century. Hormone therapies were developed in the mid–20th century, resulting in Nobel Prizes for their developers Charles Huggins and Andrzej Schally. (Full article...)",
-//   ),
-//   Video(
-//     thumbnail: AppIcons.cameleon,
-//     title: 'Dart Programming',
-//     duration: '15:45',
-//     link:
-//         'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-//     channelName: 'CodeWithDart',
-//     views: '2M',
-//     uploadDate: '2025-01-19',
-//     description:
-//         "Prostate cancer is the uncontrolled growth of cells in the prostate. It is often detected through blood tests for prostate-specific antigen, followed by a biopsy. Most prostate tumors (diagram pictured) cause no health problems, and are managed with surveillance. Dangerous tumors can be surgically removed or destroyed with radiation therapy. Those whose cancer spreads receive hormone therapy, targeted therapy, and eventually chemotherapy. Most tumors are confined to the prostate, and 99% of men survive ten years post-diagnosis. Those whose tumors have metastasized to distant body sites have a poorer prognosis; 30% to 40% are still alive five years after diagnosis. Each year 1.2 million men are diagnosed with prostate cancer and 350,000 die of the disease, making it the second-leading cause of cancer in men. Prostate tumors were first described in the mid-19th century. Hormone therapies were developed in the mid–20th century, resulting in Nobel Prizes for their developers Charles Huggins and Andrzej Schally. (Full article...)",
-//   ),
-// ];
+  Map<String, dynamic> toJson({required int user_id}) {
+    return {
+      'handle': handle,
+      'name': name,
+      'photo': photo,
+      'uploaded_at': uploadedAt,
+      'description': description,
+      'video_id': videoId,
+      'id': id,
+      'user_id': user_id, //  to send user id also to history
+      'video_data': video,
+      'thumbnail': thumbnail,
+      'title': title,
+      'total_likes': totalLikes,
+      'total_dislikes': totalDislikes,
+      'type': type,
+    };
+  }
 
-// class GetVideoModel {
-//   final int videoId;
-//   final int id;
-//   final String video;
-//   final String thumbnail;
-//   final String title;
-//   final String description;
-//   final String type;
-//   final String totalLikes;
-//   final String totalDislikes;
-//   final DateTime uploadedAt;
-//   final String photo;
-//   final String name;
-
-//   GetVideoModel({
-//     required this.videoId,
-//     required this.id,
-//     required this.video,
-//     required this.thumbnail,
-//     required this.title,
-//     required this.description,
-//     required this.type,
-//     required this.totalLikes,
-//     required this.totalDislikes,
-//     required this.uploadedAt,
-//     required this.photo,
-//     required this.name,
-//   });
-
-//   factory GetVideoModel.fromJson(Map<String, dynamic> json) {
-//     return GetVideoModel(
-//       videoId: json['video_id'],
-//       id: json['id'],
-//       video: json['video_data'],
-//       thumbnail: json['thumbnail'],
-//       title: json['title'],
-//       description: json['description'],
-//       type: json['type'],
-//       totalLikes: json['totallikes'].toString(),
-//       totalDislikes: json['totaldislikes'].toString(),
-//       uploadedAt: DateTime.parse(json['uploaded_at']),
-//       photo: json['photo'],
-//       name: json['name'],
-//     );
-//   }
-// }
+  factory GetVideoModel.fromJson(Map<String, dynamic> json) {
+    return GetVideoModel(
+      videoId: json['video_id'],
+      id: json['id'],
+      video: json['video_data'],
+      thumbnail: json['thumbnail'],
+      title: json['title'],
+      description: json['description'],
+      type: json['type'],
+      totalLikes: json['total_likes'],
+      totalDislikes: json['total_dislikes'],
+      uploadedAt: DateFormat('dd MMM, yyyy')
+          .format(DateTime.parse(json['uploaded_at'])),
+      photo: json['photo'],
+      name: json['name'],
+      handle: json['handle'],
+    );
+  }
+}

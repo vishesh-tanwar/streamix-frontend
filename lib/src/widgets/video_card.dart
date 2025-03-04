@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
 import 'package:project/src/components/bottom_drawer.dart';
+import 'package:project/src/models/video.dart';
 import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/utils/scale.dart';
 
@@ -29,7 +30,7 @@ class VideoCard extends StatelessWidget {
           Stack(
             children: [
               Image.network(
-                video.thumbnail,
+                'http://192.168.1.30:3000${video.thumbnail}',
                 width: Scale.screenWidth,
                 height: Scale.screenHeight * 0.256,
                 fit: BoxFit.cover,

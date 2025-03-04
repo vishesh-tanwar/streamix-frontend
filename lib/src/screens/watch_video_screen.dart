@@ -4,7 +4,8 @@ import 'package:project/src/components/bottom_bar.dart';
 import 'package:project/src/components/watch_video_comment.dart';
 import 'package:project/src/components/watch_video_reel.dart';
 import 'package:project/src/components/watch_video_slideBar.dart';
-// import 'package:project/src/models/video.dart';
+import 'package:project/src/models/video.dart';
+import 'package:project/src/providers/getreel_provider.dart';
 import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/widgets/description.dart';
 import 'package:project/src/widgets/reuse_video_player.dart';
@@ -48,11 +49,13 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
   void initState() {
     super.initState();
     Future.microtask(() => ref.read(getVideoProvider.notifier).fetchVideos());
+    Future.microtask(() => ref.read(getReelsProvider.notifier).fetchReels());
   }
 
   @override
   Widget build(BuildContext context) {
     final videoData = ref.watch(getVideoProvider);
+    // final reelData = ref.watch(getReelsProvider);
 
     return PopScope(
         canPop: false,

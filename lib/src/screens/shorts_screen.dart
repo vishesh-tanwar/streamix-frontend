@@ -1,28 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/strings.dart';
 import 'package:project/src/models/reels.dart';
+import 'package:project/src/models/video.dart';
+import 'package:project/src/providers/getreel_provider.dart';
 import 'package:project/src/widgets/reuse_video_player.dart';
 import 'package:project/src/utils/scale.dart';
 
-class ShortsScreen extends StatefulWidget {
+class ShortsScreen extends ConsumerStatefulWidget {
   final bool showBackButton;
-
+  final int initialIndex;
   const ShortsScreen({
     Key? key,
     required this.showBackButton,
+    required this.initialIndex,
   }) : super(key: key);
 
   @override
-  State<ShortsScreen> createState() => _ShortsScreenState();
+  ConsumerState<ShortsScreen> createState() => _ShortsScreenState();
 }
 
-class _ShortsScreenState extends State<ShortsScreen> {
+class _ShortsScreenState extends ConsumerState<ShortsScreen> {
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: widget.initialIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final reelData = ref.watch(getReelsProvider);
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: PageView.builder(
+          onPageChanged: (value) {},
+          controller: _pageController,
           scrollDirection: Axis.vertical,
           itemCount: reelData.length,
           itemBuilder: (context, index) {
@@ -125,7 +146,7 @@ class _ShortsScreenState extends State<ShortsScreen> {
     );
   }
 
-  Widget _buildChannelInfo(Reels reel) {
+  Widget _buildChannelInfo(GetVideoModel reel) {
     return Row(
       children: [
         Container(
@@ -134,14 +155,14 @@ class _ShortsScreenState extends State<ShortsScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.toScale),
             image: DecorationImage(
-              image: AssetImage(reel.thumbnail),
+              image: NetworkImage(reel.photo),
               fit: BoxFit.cover,
             ),
           ),
         ),
         SizedBox(width: Scale.screenWidth * 0.02),
         Text(
-          reel.channel,
+          reel.handle,
           style: const TextStyle(color: Colors.white),
         ),
         SizedBox(width: Scale.screenWidth * 0.02),
@@ -163,7 +184,7 @@ class _ShortsScreenState extends State<ShortsScreen> {
     );
   }
 
-  Widget _buildDescription(Reels reel) {
+  Widget _buildDescription(GetVideoModel reel) {
     return Container(
       width: Scale.screenWidth * 0.98,
       padding: EdgeInsets.all(10.toScale),
