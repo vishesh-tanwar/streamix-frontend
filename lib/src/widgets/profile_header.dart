@@ -4,6 +4,8 @@ import 'package:project/src/providers/user_provider.dart';
 import 'package:project/src/utils/scale.dart';
 
 class ProfileHeader extends ConsumerWidget {
+  const ProfileHeader({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);

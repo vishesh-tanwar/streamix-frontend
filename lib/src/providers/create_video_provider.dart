@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:mime/mime.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http_parser/http_parser.dart';
 import 'package:project/src/providers/user_provider.dart';
+import 'package:video_player/video_player.dart';
 
 final uploadProvider =
     StateNotifierProvider<UploadNotifier, UploadModel>((ref) {
@@ -23,7 +26,8 @@ class UploadNotifier extends StateNotifier<UploadModel> {
             description: '',
             type: '',
             isUploading: false,
-            selectedIndex: -1));
+            selectedIndex: -1,
+            duration: ''));
 
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
@@ -53,7 +57,16 @@ class UploadNotifier extends StateNotifier<UploadModel> {
 
       if (result != null && result.files.single.path != null) {
         File pickedFile = File(result.files.single.path!);
-        state = state.copyWith(videoData: pickedFile);
+
+        final controller = VideoPlayerController.file(pickedFile);
+        await controller.initialize();
+        Duration duration = controller.value.duration;
+        int minutes = duration.inMinutes;
+        int seconds = duration.inSeconds % 60;
+        controller.dispose();
+        final videoDuration = '$minutes:${seconds.toString().padLeft(2, '0')}';
+        state = state.copyWith(videoData: pickedFile, duration: videoDuration);
+        print('duration of video ==========> ${state.duration}');
         print("Selected video path: ${state.videoData?.path}");
       } else {
         print("No video selected");
@@ -71,6 +84,7 @@ class UploadNotifier extends StateNotifier<UploadModel> {
 
       if (result != null && result.files.single.path != null) {
         File pickedFile = File(result.files.single.path!);
+
         state = state.copyWith(thumbnail: pickedFile);
         print("Selected thumbnail path: ${state.thumbnail?.path}");
       } else {
@@ -130,6 +144,7 @@ class UploadNotifier extends StateNotifier<UploadModel> {
       request.fields['title'] = state.title;
       request.fields['description'] = state.description;
       request.fields['type'] = state.type;
+      request.fields['duration'] = state.duration;
 
       var response = await request.send();
       var responseBody = await response.stream.bytesToString();
@@ -143,7 +158,8 @@ class UploadNotifier extends StateNotifier<UploadModel> {
             videoData: null,
             thumbnail: null,
             type: "",
-            selectedIndex: -1);
+            selectedIndex: -1,
+            duration: '');
 
         // Show success Snackbar
         ScaffoldMessenger.of(context).showSnackBar(
@@ -180,6 +196,7 @@ class UploadModel {
   final String type;
   final bool isUploading;
   final int selectedIndex;
+  final String duration;
 
   UploadModel(
       {required this.videoData,
@@ -188,7 +205,8 @@ class UploadModel {
       required this.description,
       required this.type,
       required this.isUploading,
-      required this.selectedIndex});
+      required this.selectedIndex,
+      required this.duration});
 
   UploadModel copyWith(
       {File? videoData,
@@ -197,15 +215,16 @@ class UploadModel {
       String? description,
       String? type,
       bool? isUploading,
-      int? selectedIndex}) {
+      int? selectedIndex,
+      String? duration}) {
     return UploadModel(
-      videoData: videoData ?? this.videoData,
-      thumbnail: thumbnail ?? this.thumbnail,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      type: type ?? this.type,
-      isUploading: isUploading ?? this.isUploading,
-      selectedIndex: selectedIndex ?? this.selectedIndex,
-    );
+        videoData: videoData ?? this.videoData,
+        thumbnail: thumbnail ?? this.thumbnail,
+        title: title ?? this.title,
+        description: description ?? this.description,
+        type: type ?? this.type,
+        isUploading: isUploading ?? this.isUploading,
+        selectedIndex: selectedIndex ?? this.selectedIndex,
+        duration: duration ?? this.duration);
   }
 }

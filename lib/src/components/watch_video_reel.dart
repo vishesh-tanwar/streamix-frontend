@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/icons.dart';
-// import 'package:project/src/models/reels.dart';
 import 'package:project/src/providers/getreel_provider.dart';
 import 'package:project/src/utils/scale.dart';
 import 'package:project/src/widgets/reel_card.dart';

@@ -12,10 +12,10 @@ class ReelCard extends StatelessWidget {
   final int index;
 
   const ReelCard({
-    Key? key,
+    super.key,
     required this.reels,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

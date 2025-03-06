@@ -4,6 +4,7 @@ final carousalProvider = StateNotifierProvider<carousalNotifier, int>((ref) {
   return carousalNotifier();
 });
 
+// ignore: camel_case_types
 class carousalNotifier extends StateNotifier<int> {
   carousalNotifier() : super(0);
 

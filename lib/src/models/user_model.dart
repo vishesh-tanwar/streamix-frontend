@@ -5,7 +5,7 @@ class UserModel {
   final String email;
   final String photo;
   final String handle;
-  final String token; // Add token if available
+  final String token;
 
   UserModel({
     required this.id,
@@ -18,7 +18,6 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    // converts json object into dart object .Typically used when receiving data from an API.
     return UserModel(
       id: json['id'] ?? '',
       isLoggedIn: json['isLoggedIn'] ?? false,

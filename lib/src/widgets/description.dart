@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/models/video.dart';
-// import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/utils/scale.dart';
 import 'package:project/src/assets/strings.dart';
 
@@ -18,7 +17,6 @@ class Description extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Fixed description headline
           Padding(
             padding: EdgeInsets.all(10.toScale),
             child: Row(
@@ -32,9 +30,14 @@ class Description extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Icon(
-                  Icons.cancel_presentation_sharp,
-                  color: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    Icons.cancel_presentation_sharp,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

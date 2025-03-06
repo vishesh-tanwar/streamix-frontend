@@ -3,6 +3,8 @@ import 'package:project/src/utils/scale.dart';
 import 'package:project/src/assets/strings.dart';
 
 class WatchVideoComment extends StatelessWidget {
+  const WatchVideoComment({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(

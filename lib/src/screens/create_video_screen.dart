@@ -9,7 +9,7 @@ import 'package:project/src/utils/scale.dart';
 class CreateVideoScreen extends ConsumerWidget {
   CreateVideoScreen({super.key});
 
-  final List<String> upload = [Strings.reel, Strings.video, Strings.post];
+  final List<String> upload = [Strings.reel, Strings.video];
 
   final List<IconData> logo = [
     AppIcons.thumbnail,
@@ -118,7 +118,7 @@ class CreateVideoScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: Scale.screenHeight * 0.026),
                           Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: List.generate(upload.length, (index) {
                                 bool isSelected =
                                     index == uploadState.selectedIndex;

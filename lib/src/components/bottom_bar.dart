@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project/src/assets/icons.dart';
-import 'package:project/src/models/reels.dart';
 import 'package:project/src/screens/create_video_screen.dart';
 import 'package:project/src/screens/home_screen.dart';
 import 'package:project/src/screens/profile_screen.dart';
@@ -12,6 +11,7 @@ class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _BottomBarState createState() => _BottomBarState();
 }
 

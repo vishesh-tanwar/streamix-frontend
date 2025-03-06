@@ -6,10 +6,10 @@ class BottomDrawer extends StatelessWidget {
   final List<String> texts;
 
   const BottomDrawer({
-    Key? key,
+    super.key,
     required this.icons,
     required this.texts,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,11 @@ class BottomDrawer extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min, 
+        mainAxisSize: MainAxisSize.min,
         children: [
           ListView.builder(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(), 
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: texts.length,
             itemBuilder: (context, index) {
               return GestureDetector(

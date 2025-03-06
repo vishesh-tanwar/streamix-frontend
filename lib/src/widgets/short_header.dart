@@ -5,7 +5,7 @@ import 'package:project/src/utils/scale.dart';
 import 'package:project/src/components/bottom_drawer.dart';
 
 class ShortsHeader extends StatelessWidget {
-  const ShortsHeader({Key? key}) : super(key: key);
+  const ShortsHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

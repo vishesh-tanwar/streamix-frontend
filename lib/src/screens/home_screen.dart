@@ -10,7 +10,6 @@ import 'package:project/src/widgets/reel_card.dart';
 import '../components/sliver_app_bar.dart';
 import '../components/drawer.dart';
 import '../widgets/video_card.dart';
-// import '../models/reels.dart';
 import '../widgets/short_header.dart';
 import '../assets/strings.dart';
 import '../providers/getvideo_provider.dart';
@@ -34,6 +33,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -41,12 +41,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ref.read(getVideoProvider.notifier).fetchVideos();
       ref.read(getReelsProvider.notifier).fetchReels();
     }); // Fetch data once
+    scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (scrollController.position.pixels >=
+        scrollController.position.maxScrollExtent - 300) {
+      ref.read(getVideoProvider.notifier).fetchVideos(loadMore: true);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final videoData = ref.watch(getVideoProvider);
     final reelData = ref.watch(getReelsProvider);
+
     return Scaffold(
       key: _homeScaffoldKey,
       drawer: MyDrawer(),
@@ -54,6 +69,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         color: Colors.black,
         child: SafeArea(
           child: CustomScrollView(
+            controller: scrollController,
             slivers: [
               CustomSliverAppBar(
                 categories: category,
@@ -84,24 +100,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ...List.generate(
                         videoData.length,
                         (i) => GestureDetector(
-                          onLongPress: () {
-                            print("on long press");
-                          },
                           onTap: () {
                             ref
                                 .read(historyProvider.notifier)
                                 .sendToHistory(videoData[i]);
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    WatchVideoScreen(video: videoData[i]),
+                                builder: (context) => WatchVideoScreen(
+                                    videoId: videoData[i].videoId),
                               ),
                             );
                           },
                           child: VideoCard(video: videoData[i]),
                         ),
                       ),
+                      ref.watch(getVideoProvider.notifier).isFetching
+                          ? CircularProgressIndicator()
+                          : SizedBox.shrink()
                     ],
                   ),
                 ),

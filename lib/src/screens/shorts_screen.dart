@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/strings.dart';
-import 'package:project/src/models/reels.dart';
 import 'package:project/src/models/video.dart';
 import 'package:project/src/providers/getreel_provider.dart';
 import 'package:project/src/widgets/reuse_video_player.dart';
@@ -11,10 +10,10 @@ class ShortsScreen extends ConsumerStatefulWidget {
   final bool showBackButton;
   final int initialIndex;
   const ShortsScreen({
-    Key? key,
+    super.key,
     required this.showBackButton,
     required this.initialIndex,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<ShortsScreen> createState() => _ShortsScreenState();
@@ -27,6 +26,9 @@ class _ShortsScreenState extends ConsumerState<ShortsScreen> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: widget.initialIndex);
+    Future.microtask(() {
+      ref.read(getReelsProvider.notifier).fetchReels();
+    });
   }
 
   @override
@@ -38,15 +40,25 @@ class _ShortsScreenState extends ConsumerState<ShortsScreen> {
   @override
   Widget build(BuildContext context) {
     final reelData = ref.watch(getReelsProvider);
+    final reelNotifier = ref.read(getReelsProvider.notifier);
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: PageView.builder(
-          onPageChanged: (value) {},
           controller: _pageController,
           scrollDirection: Axis.vertical,
-          itemCount: reelData.length,
+          itemCount: reelData.length + (reelNotifier.isFetching ? 1 : 0),
+          onPageChanged: (index) {
+            if (index >= reelData.length - 1) {
+              reelNotifier.fetchReels(loadMore: true);
+            }
+          },
           itemBuilder: (context, index) {
+            if (index == reelData.length) {
+              return Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              );
+            }
             return Stack(
               children: [
                 ReusableVideoPlayer(videoUrl: reelData[index].video),

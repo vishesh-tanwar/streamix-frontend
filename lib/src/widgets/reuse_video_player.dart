@@ -6,8 +6,7 @@ import 'package:project/src/providers/video_player_provider.dart';
 class ReusableVideoPlayer extends ConsumerWidget {
   final String videoUrl;
 
-  const ReusableVideoPlayer({Key? key, required this.videoUrl})
-      : super(key: key);
+  const ReusableVideoPlayer({super.key, required this.videoUrl});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

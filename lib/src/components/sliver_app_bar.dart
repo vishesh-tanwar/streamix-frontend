@@ -8,10 +8,10 @@ class CustomSliverAppBar extends StatelessWidget {
   final Function onDrawerTap;
 
   const CustomSliverAppBar({
-    Key? key,
+    super.key,
     required this.categories,
     required this.onDrawerTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +60,10 @@ class CustomSliverAppBar extends StatelessWidget {
           children: [
             SizedBox(height: Scale.screenHeight * 0.07),
             SizedBox(
-              height: Scale.screenHeight * 0.04, 
-              child: ListView.builder(        
+              height: Scale.screenHeight * 0.04,
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: categories.length + 2, 
+                itemCount: categories.length + 2,
                 itemBuilder: (context, index) {
                   if (index == 0) {
                     return Padding(
@@ -79,9 +79,13 @@ class CustomSliverAppBar extends StatelessWidget {
                       ),
                     );
                   }
-                  if (index == categories.length+1){
-                    return Padding(padding: EdgeInsets.only(left: 6.0,right: 6.0,top: 6.0),
-                      child: Text("Send Feedback",style: TextStyle(color: Colors.blue),),
+                  if (index == categories.length + 1) {
+                    return Padding(
+                      padding: EdgeInsets.only(left: 6.0, right: 6.0, top: 6.0),
+                      child: Text(
+                        "Send Feedback",
+                        style: TextStyle(color: Colors.blue),
+                      ),
                     );
                   }
                   // Remaining category buttons
@@ -97,7 +101,7 @@ class CustomSliverAppBar extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                       ),
                       child: Text(
-                        categories[index - 1], 
+                        categories[index - 1],
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),

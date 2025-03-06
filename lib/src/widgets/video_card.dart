@@ -3,16 +3,15 @@ import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
 import 'package:project/src/components/bottom_drawer.dart';
 import 'package:project/src/models/video.dart';
-import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/utils/scale.dart';
 
 class VideoCard extends StatelessWidget {
   final GetVideoModel video;
 
   const VideoCard({
-    Key? key,
+    super.key,
     required this.video,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class VideoCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Positioned(
-                top: Scale.screenHeight * 0.256 * 0.8,
+                top: Scale.screenHeight * 0.256 * 0.85,
                 left: Scale.screenWidth * 0.85,
                 child: Container(
                   width: Scale.screenWidth * 0.1,
@@ -47,7 +46,7 @@ class VideoCard extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      "10:30",
+                      video.duration,
                       style: TextStyle(color: Colors.white, fontSize: 11),
                     ),
                   ),

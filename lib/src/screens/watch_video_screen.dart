@@ -4,7 +4,7 @@ import 'package:project/src/components/bottom_bar.dart';
 import 'package:project/src/components/watch_video_comment.dart';
 import 'package:project/src/components/watch_video_reel.dart';
 import 'package:project/src/components/watch_video_slideBar.dart';
-import 'package:project/src/models/video.dart';
+import 'package:project/src/providers/get_video_by_id_provider.dart';
 import 'package:project/src/providers/getreel_provider.dart';
 import 'package:project/src/providers/getvideo_provider.dart';
 import 'package:project/src/widgets/description.dart';
@@ -35,9 +35,10 @@ final List<IconData> barIcon = [
 ];
 
 class WatchVideoScreen extends ConsumerStatefulWidget {
-  final GetVideoModel video;
+  // final GetVideoModel video;
+  final int videoId;
 
-  WatchVideoScreen({super.key, required this.video});
+  WatchVideoScreen({super.key, required this.videoId});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -50,13 +51,15 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
     super.initState();
     Future.microtask(() => ref.read(getVideoProvider.notifier).fetchVideos());
     Future.microtask(() => ref.read(getReelsProvider.notifier).fetchReels());
+    Future.microtask(() => ref
+        .read(getVideoByIdProvider.notifier)
+        .getVideoById(videoId: widget.videoId));
   }
 
   @override
   Widget build(BuildContext context) {
-    final videoData = ref.watch(getVideoProvider);
-    // final reelData = ref.watch(getReelsProvider);
-
+    final videos = ref.watch(getVideoProvider);
+    final videoData = ref.watch(getVideoByIdProvider);
     return PopScope(
         canPop: false,
         onPopInvokedWithResult: (b, r) async {
@@ -73,11 +76,10 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
               children: [
                 Column(
                   children: [
-                    // Fixed video player
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: Scale.screenHeight * 0.3,
-                      child: ReusableVideoPlayer(videoUrl: widget.video.video),
+                      child: ReusableVideoPlayer(videoUrl: videoData.video),
                     ),
                     SizedBox(
                       height: Scale.screenHeight * 0.01,
@@ -97,7 +99,7 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
                                     context: context,
                                     builder: (context) {
                                       return Description(
-                                        video: widget.video,
+                                        video: videoData,
                                       );
                                     },
                                   );
@@ -106,7 +108,7 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      widget.video.title,
+                                      videoData.title,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
@@ -118,7 +120,7 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
                                     Row(
                                       children: [
                                         Text(
-                                          '${widget.video.uploadedAt}',
+                                          videoData.uploadedAt,
                                           style: const TextStyle(
                                               color: Colors.grey, fontSize: 12),
                                         ),
@@ -146,15 +148,15 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           image: DecorationImage(
-                                            image: NetworkImage(
-                                                widget.video.photo),
+                                            image:
+                                                NetworkImage(videoData.photo),
                                             fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
                                       SizedBox(width: Scale.screenWidth * 0.02),
                                       Text(
-                                        widget.video.name,
+                                        videoData.name,
                                         style: const TextStyle(
                                             color: Colors.white),
                                       )
@@ -182,18 +184,18 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
                           ),
                           WatchVideoReel(),
                           ...List.generate(
-                            videoData.length,
+                            videos.length,
                             (i) => GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        WatchVideoScreen(video: videoData[i]),
+                                        WatchVideoScreen(videoId: videos[i].id),
                                   ),
                                 );
                               },
-                              child: VideoCard(video: videoData[i]),
+                              child: VideoCard(video: videos[i]),
                             ),
                           ),
                         ],

@@ -14,6 +14,8 @@ class UploadBody extends StatelessWidget {
     Strings.addDescription,
   ];
 
+  UploadBody({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

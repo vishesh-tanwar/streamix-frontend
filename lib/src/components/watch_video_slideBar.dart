@@ -24,6 +24,8 @@ class WatchVideoSlidebar extends StatelessWidget {
     AppIcons.flag
   ];
 
+  WatchVideoSlidebar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

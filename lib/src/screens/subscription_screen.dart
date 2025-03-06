@@ -8,7 +8,7 @@ class GoogleSignInButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userNotifier = ref.read(userProvider.notifier);
-    final User = ref.watch(userProvider);
+    final user = ref.watch(userProvider);
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 20, 20, 20),
         body: Center(
@@ -18,7 +18,7 @@ class GoogleSignInButton extends ConsumerWidget {
             children: [
               userNotifier.currentUser != null
                   ? Text(
-                      "Signed in as: ${User.name} user id : ${User.id}",
+                      "Signed in as: ${user.name} user id : ${user.id}",
                       style: TextStyle(color: Colors.white),
                     )
                   : Text(""),

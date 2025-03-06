@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/models/video.dart';
@@ -8,6 +10,7 @@ final getHistoryProvider =
   return getHistoryNotifier(ref);
 });
 
+// ignore: camel_case_types
 class getHistoryNotifier extends StateNotifier<List<GetVideoModel>> {
   final Ref ref;
   getHistoryNotifier(this.ref) : super([]);

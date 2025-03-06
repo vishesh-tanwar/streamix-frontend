@@ -4,7 +4,7 @@ import '../assets/icons.dart';
 import '../assets/strings.dart';
 
 class MyDrawer extends StatelessWidget {
-  MyDrawer({Key? key}) : super(key: key);
+  MyDrawer({super.key});
 
   final List<String> titles = [
     Strings.trending,

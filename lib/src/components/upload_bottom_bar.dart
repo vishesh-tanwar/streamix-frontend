@@ -3,6 +3,8 @@ import 'package:project/src/assets/strings.dart';
 import 'package:project/src/utils/scale.dart';
 
 class UploadBottomBar extends StatelessWidget {
+  const UploadBottomBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
