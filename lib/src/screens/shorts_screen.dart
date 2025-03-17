@@ -8,11 +8,11 @@ import 'package:project/src/utils/scale.dart';
 
 class ShortsScreen extends ConsumerStatefulWidget {
   final bool showBackButton;
-  final int initialIndex;
+  final GetVideoModel? initialReel;
   const ShortsScreen({
     super.key,
     required this.showBackButton,
-    required this.initialIndex,
+    this.initialReel,
   });
 
   @override
@@ -25,9 +25,12 @@ class _ShortsScreenState extends ConsumerState<ShortsScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: widget.initialIndex);
+    _pageController = PageController(initialPage: 0);
+
     Future.microtask(() {
-      ref.read(getReelsProvider.notifier).fetchReels();
+      ref
+          .read(getReelsProvider.notifier)
+          .fetchReels(initialReel: widget.initialReel);
     });
   }
 
@@ -44,43 +47,47 @@ class _ShortsScreenState extends ConsumerState<ShortsScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-        child: PageView.builder(
-          controller: _pageController,
-          scrollDirection: Axis.vertical,
-          itemCount: reelData.length + (reelNotifier.isFetching ? 1 : 0),
-          onPageChanged: (index) {
-            if (index >= reelData.length - 1) {
-              reelNotifier.fetchReels(loadMore: true);
-            }
-          },
-          itemBuilder: (context, index) {
-            if (index == reelData.length) {
-              return Center(
+        child: reelData.isEmpty
+            ? Center(
                 child: CircularProgressIndicator(color: Colors.white),
-              );
-            }
-            return Stack(
-              children: [
-                ReusableVideoPlayer(videoUrl: reelData[index].video),
-                _buildOverlayControls(),
-                _buildTopBar(),
-                Positioned(
-                  top: widget.showBackButton
-                      ? Scale.screenHeight * 0.8
-                      : Scale.screenHeight * 0.75,
-                  left: 12.toScale,
-                  child: _buildChannelInfo(reelData[index]),
-                ),
-                Positioned(
-                  top: widget.showBackButton
-                      ? Scale.screenHeight * 0.85
-                      : Scale.screenHeight * 0.8,
-                  child: _buildDescription(reelData[index]),
-                ),
-              ],
-            );
-          },
-        ),
+              )
+            : PageView.builder(
+                controller: _pageController,
+                scrollDirection: Axis.vertical,
+                itemCount: reelData.length + (reelNotifier.isFetching ? 1 : 0),
+                onPageChanged: (index) {
+                  if (index >= reelData.length - 1) {
+                    reelNotifier.fetchReels(loadMore: true);
+                  }
+                },
+                itemBuilder: (context, index) {
+                  if (index == reelData.length) {
+                    return Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    );
+                  }
+                  return Stack(
+                    children: [
+                      ReusableVideoPlayer(videoUrl: reelData[index].video),
+                      _buildOverlayControls(),
+                      _buildTopBar(),
+                      Positioned(
+                        top: widget.showBackButton
+                            ? Scale.screenHeight * 0.8
+                            : Scale.screenHeight * 0.75,
+                        left: 12.toScale,
+                        child: _buildChannelInfo(reelData[index]),
+                      ),
+                      Positioned(
+                        top: widget.showBackButton
+                            ? Scale.screenHeight * 0.85
+                            : Scale.screenHeight * 0.8,
+                        child: _buildDescription(reelData[index]),
+                      ),
+                    ],
+                  );
+                },
+              ),
       ),
     );
   }

@@ -16,7 +16,8 @@ class GetReelsNotifier extends StateNotifier<List<GetVideoModel>> {
   bool isFetching = false;
   bool _hasMore = true;
 
-  Future<void> fetchReels({bool loadMore = false}) async {
+  Future<void> fetchReels(
+      {bool loadMore = false, GetVideoModel? initialReel}) async {
     if (isFetching || (!_hasMore && loadMore)) return;
 
     isFetching = true;
@@ -31,8 +32,6 @@ class GetReelsNotifier extends StateNotifier<List<GetVideoModel>> {
           'http://192.168.1.30:3000/api/controllers/allreels?page=$_currentPage');
 
       if (response.statusCode == 200) {
-        print(response.data);
-
         final responseData = response.data;
 
         if (responseData is Map<String, dynamic> &&
@@ -47,6 +46,11 @@ class GetReelsNotifier extends StateNotifier<List<GetVideoModel>> {
           } else {
             state = videos;
           }
+
+          if (initialReel != null) {
+            setInitialReel(initialReel);
+          }
+
           _hasMore = videos.length == 4;
           if (_hasMore) _currentPage++;
         } else {
@@ -59,5 +63,12 @@ class GetReelsNotifier extends StateNotifier<List<GetVideoModel>> {
       isFetching = false;
       state = [...state];
     }
+  }
+
+  void setInitialReel(GetVideoModel initialReel) {
+    List<GetVideoModel> updatedReels = state.toList();
+    updatedReels.removeWhere((reel) => reel.videoId == initialReel.videoId);
+    updatedReels.insert(0, initialReel);
+    state = updatedReels;
   }
 }

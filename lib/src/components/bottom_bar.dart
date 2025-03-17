@@ -11,7 +11,6 @@ class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _BottomBarState createState() => _BottomBarState();
 }
 
@@ -22,7 +21,6 @@ class _BottomBarState extends State<BottomBar> {
     HomeScreen(),
     ShortsScreen(
       showBackButton: false,
-      initialIndex: 0,
     ),
     CreateVideoScreen(),
     GoogleSignInButton(),

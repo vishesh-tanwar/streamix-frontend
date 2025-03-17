@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project/src/models/posts.dart';
+// import 'package:project/src/models/posts.dart';
 import 'package:project/src/providers/getreel_provider.dart';
 import 'package:project/src/providers/history_provider.dart';
+import 'package:project/src/screens/shorts_screen.dart';
 import 'package:project/src/screens/watch_video_screen.dart';
 import 'package:project/src/utils/scale.dart';
-import 'package:project/src/widgets/post.dart';
+// import 'package:project/src/widgets/post.dart';
 import 'package:project/src/widgets/reel_card.dart';
 import '../components/sliver_app_bar.dart';
 import '../components/drawer.dart';
@@ -91,12 +92,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               runSpacing: 6,
                               children: [
                                 ...List.generate(
-                                    4,
-                                    (i) =>
-                                        ReelCard(reels: reelData[i], index: i)),
+                                  4,
+                                  (i) => InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShortsScreen(
+                                                      showBackButton: true,
+                                                      initialReel: reelData[i]),
+                                            ));
+                                      },
+                                      child: ReelCard(
+                                          reels: reelData[i], index: i)),
+                                )
                               ],
                             ),
-                      PostCard(posts: postData[0]),
+                      // PostCard(posts: postData[0]),
                       ...List.generate(
                         videoData.length,
                         (i) => GestureDetector(

@@ -23,14 +23,8 @@ class AppIcons {
 
   // Image assets
   static const String youtubeLogoImage = "assets/images/yt2.png";
-  static const String ocean = "assets/images/image.jpeg";
   static const String cameleon = "assets/images/image2.jpeg";
-  static const String moon = "assets/images/image3.jpeg";
   static const String reelLogo = "assets/images/reel_logo.png";
-  static const String reel = "assets/images/reel.jpg";
-  static const String reel2 = "assets/images/reel2.jpg";
-  static const String reel3 = "assets/images/reel3.jpg";
-  static const String reel4 = "assets/images/reel4.jpg";
 
   // bottom bar
   static const IconData home = Icons.home;

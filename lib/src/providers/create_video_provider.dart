@@ -66,8 +66,6 @@ class UploadNotifier extends StateNotifier<UploadModel> {
         controller.dispose();
         final videoDuration = '$minutes:${seconds.toString().padLeft(2, '0')}';
         state = state.copyWith(videoData: pickedFile, duration: videoDuration);
-        print('duration of video ==========> ${state.duration}');
-        print("Selected video path: ${state.videoData?.path}");
       } else {
         print("No video selected");
       }
@@ -86,7 +84,6 @@ class UploadNotifier extends StateNotifier<UploadModel> {
         File pickedFile = File(result.files.single.path!);
 
         state = state.copyWith(thumbnail: pickedFile);
-        print("Selected thumbnail path: ${state.thumbnail?.path}");
       } else {
         print("No thumbnail selected");
       }

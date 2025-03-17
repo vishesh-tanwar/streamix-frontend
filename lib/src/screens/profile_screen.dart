@@ -82,7 +82,7 @@ class ProfileScreen extends ConsumerWidget {
                   ProfileHeader(),
                   HorizontalButtonList(barText: barText, barIcon: barIcon),
                   HistoryBar(),
-                  PlaylistBar(historyItems: historyItems),
+                  // PlaylistBar(historyItems: historyItems),
                   ListSection(label: listLabel, icon: listIcon)
                 ],
               ),
