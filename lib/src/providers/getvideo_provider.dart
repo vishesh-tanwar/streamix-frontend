@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project/src/assets/strings.dart';
 import 'package:project/src/models/video.dart';
 
 final getVideoProvider =
@@ -27,8 +28,8 @@ class GetVideoNotifier extends StateNotifier<List<GetVideoModel>> {
         state = [];
       }
 
-      final response = await Dio().get(
-          'http://192.168.1.30:3000/api/controllers/allvideos?page=$_currentPage');
+      final response = await Dio()
+          .get('${Strings.url}/api/controllers/allvideos?page=$_currentPage');
 
       if (response.statusCode == 200) {
         print(response.data);

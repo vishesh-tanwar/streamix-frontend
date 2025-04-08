@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project/src/assets/strings.dart';
 import 'package:project/src/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
@@ -52,8 +53,7 @@ class UserNotifier extends StateNotifier<UserModel> {
   }
 
   Future<UserModel> _sendUserDataToBackend(Map<String, String> userData) async {
-    const String backendUrl = "http://192.168.1.30:3000/api/controllers/users";
-    // const String backendUrl = 'http://192.168.1.30:3001/api/controllers/users';
+    const String backendUrl = "${Strings.url}/api/controllers/users";
     try {
       final response = await http.post(
         Uri.parse(backendUrl),

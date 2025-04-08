@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project/src/assets/strings.dart';
 import 'package:project/src/models/video.dart';
 import 'package:project/src/providers/user_provider.dart';
 
@@ -18,7 +19,7 @@ class getHistoryNotifier extends StateNotifier<List<GetVideoModel>> {
   Future<void> fetchHistory() async {
     final user = ref.read(userProvider);
     final url =
-        'http://192.168.1.30:3000/api/controllers/getHistoryById?userId=${user.id}';
+        '${Strings.url}/api/controllers/getHistoryById?userId=${user.id}';
 
     try {
       final response = await Dio().get(url);

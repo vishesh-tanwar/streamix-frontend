@@ -29,7 +29,7 @@ class VideoCard extends StatelessWidget {
           Stack(
             children: [
               Image.network(
-                'http://192.168.1.30:3000${video.thumbnail}',
+                '${Strings.url}${video.thumbnail}',
                 width: Scale.screenWidth,
                 height: Scale.screenHeight * 0.256,
                 fit: BoxFit.cover,

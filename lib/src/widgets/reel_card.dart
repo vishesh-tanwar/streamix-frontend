@@ -34,7 +34,7 @@ class ReelCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  'http://192.168.1.30:3000${reels.thumbnail}',
+                  '${Strings.url}${reels.thumbnail}',
                   width: Scale.screenWidth * 0.46,
                   height: Scale.screenHeight * 0.323,
                   fit: BoxFit.cover,

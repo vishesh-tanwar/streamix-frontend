@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project/src/assets/strings.dart';
 import 'package:project/src/models/video.dart';
 import 'package:project/src/providers/user_provider.dart';
 
@@ -31,7 +32,7 @@ class historyNotifier extends StateNotifier<GetVideoModel> {
             duration: ''));
 
   Future<void> sendToHistory(GetVideoModel videoData) async {
-    final url = 'http://192.168.1.30:3000/api/controllers/history';
+    final url = '${Strings.url}/api/controllers/history';
     final userId = ref.watch(userProvider).id;
     final dataToSend = videoData.toJson(user_id: userId);
 

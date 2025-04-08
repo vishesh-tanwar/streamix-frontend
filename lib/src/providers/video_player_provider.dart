@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project/src/assets/strings.dart';
 import 'package:video_player/video_player.dart';
 
 final videoPlayerProvider =
@@ -21,12 +22,12 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
       await state.videoController?.dispose();
     }
 
-    final controller = VideoPlayerController.networkUrl(
-        Uri.parse('http://192.168.1.30:3000$videoUrl'),
-        videoPlayerOptions: VideoPlayerOptions(
-          mixWithOthers: false,
-          allowBackgroundPlayback: false,
-        ));
+    final controller =
+        VideoPlayerController.networkUrl(Uri.parse('${Strings.url}$videoUrl'),
+            videoPlayerOptions: VideoPlayerOptions(
+              mixWithOthers: false,
+              allowBackgroundPlayback: false,
+            ));
 
     await controller.initialize();
 

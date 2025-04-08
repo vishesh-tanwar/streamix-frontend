@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http_parser/http_parser.dart';
+import 'package:project/src/assets/strings.dart';
 import 'package:project/src/providers/user_provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -106,7 +107,7 @@ class UploadNotifier extends StateNotifier<UploadModel> {
 
     state = state.copyWith(isUploading: true);
     try {
-      var uri = Uri.parse('http://192.168.1.30:3000/api/controllers/videos');
+      var uri = Uri.parse('${Strings.url}/api/controllers/videos');
       var request = http.MultipartRequest('POST', uri);
 
       String? mimeType = lookupMimeType(state.videoData!.path) ?? 'video/mp4';

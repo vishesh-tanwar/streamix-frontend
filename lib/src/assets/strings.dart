@@ -117,4 +117,6 @@ class Strings {
   static const like = "Like";
   static const dislike = "Dislike";
   static const comment = "Comment";
+
+  static const url = "http://192.168.1.30:3001";
 }
