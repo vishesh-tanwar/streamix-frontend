@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "316054920794",
-    "project_id": "yt-clone-5d45a",
-    "storage_bucket": "yt-clone-5d45a.firebasestorage.app"
+    "project_number": "290348943196",
+    "project_id": "fir-5816e",
+    "storage_bucket": "fir-5816e.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:316054920794:android:bb87f45ecd2734a4bf0263",
+        "mobilesdk_app_id": "1:290348943196:android:bbd09e06d62d49af2ee399",
         "android_client_info": {
           "package_name": "com.example.project"
         }
       },
       "oauth_client": [
         {
-          "client_id": "316054920794-is51qovc2r4a3qr64sl4mknkbkb7sqfh.apps.googleusercontent.com",
+          "client_id": "290348943196-bo4v58liedaa0vfc0266sjmgtnkrkm1i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDXeAlnJFbuOBdts_sD0ETIL1cCEP6tvJc"
+          "current_key": "AIzaSyAZHR73UTZWp7Y06yvXo4F_2KdHMsCs5HI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "316054920794-is51qovc2r4a3qr64sl4mknkbkb7sqfh.apps.googleusercontent.com",
+              "client_id": "290348943196-bo4v58liedaa0vfc0266sjmgtnkrkm1i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
