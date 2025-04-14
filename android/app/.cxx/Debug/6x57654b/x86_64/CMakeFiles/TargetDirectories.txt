@@ -1,0 +1,2 @@
+/home/vishesh/Desktop/yt_frontend/android/app/.cxx/Debug/6x57654b/x86_64/CMakeFiles/edit_cache.dir
+/home/vishesh/Desktop/yt_frontend/android/app/.cxx/Debug/6x57654b/x86_64/CMakeFiles/rebuild_cache.dir
