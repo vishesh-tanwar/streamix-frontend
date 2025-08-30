@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/strings.dart';
 import 'package:project/src/models/video.dart';
 import 'package:project/src/providers/getreel_provider.dart';
+import 'package:project/src/providers/likeOrDislike_provider.dart';
 import 'package:project/src/widgets/reuse_video_player.dart';
 import 'package:project/src/utils/scale.dart';
 
@@ -66,10 +67,11 @@ class _ShortsScreenState extends ConsumerState<ShortsScreen> {
                       child: CircularProgressIndicator(color: Colors.white),
                     );
                   }
+                  final currentReel = reelData[index];
                   return Stack(
                     children: [
                       ReusableVideoPlayer(videoUrl: reelData[index].video),
-                      _buildOverlayControls(),
+                      _buildOverlayControls(currentReel),
                       _buildTopBar(),
                       Positioned(
                         top: widget.showBackButton
@@ -92,15 +94,23 @@ class _ShortsScreenState extends ConsumerState<ShortsScreen> {
     );
   }
 
-  Widget _buildOverlayControls() {
+  Widget _buildOverlayControls(GetVideoModel reel) {
     return Positioned(
       right: 12.toScale,
       bottom: 100.toScale,
       child: Column(
         children: [
-          _buildIconWithLabel(Icons.thumb_up, Strings.like, () {}),
+          _buildIconWithLabel(Icons.thumb_up, Strings.like, () {
+            ref
+                .read(likeOrDislikeProvider.notifier)
+                .likeVideo(reel.id, reel.videoId);
+          }),
           const SizedBox(height: 12),
-          _buildIconWithLabel(Icons.thumb_down, Strings.dislike, () {}),
+          _buildIconWithLabel(Icons.thumb_down, Strings.dislike, () {
+            ref
+                .read(likeOrDislikeProvider.notifier)
+                .dislikeVideo(reel.id, reel.videoId);
+          }),
           const SizedBox(height: 12),
           _buildIconWithLabel(Icons.comment, Strings.comment, () {}),
           const SizedBox(height: 12),
@@ -117,7 +127,11 @@ class _ShortsScreenState extends ConsumerState<ShortsScreen> {
           onPressed: onTap,
           icon: Icon(
             icon,
-            color: Colors.white,
+            color: label == "Like" && ref.watch(likeProvider)
+                ? Colors.blue
+                : label == "Dislike" && ref.watch(dislikeProvider)
+                    ? Colors.blue
+                    : Colors.white,
             size: 30.toScale,
           ),
         ),

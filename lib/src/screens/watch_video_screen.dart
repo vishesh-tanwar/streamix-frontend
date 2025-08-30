@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/components/bottom_bar.dart';
-import 'package:project/src/components/watch_video_comment.dart';
 import 'package:project/src/components/watch_video_reel.dart';
 import 'package:project/src/components/watch_video_slideBar.dart';
 import 'package:project/src/providers/get_video_by_id_provider.dart';
@@ -15,23 +14,13 @@ import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
 
 final List<String> barText = [
-  Strings.share,
-  Strings.remix,
-  Strings.thanks,
-  Strings.stopAds,
-  Strings.clip,
-  Strings.save,
-  Strings.report
+  Strings.like,
+  Strings.dislike,
 ];
 
 final List<IconData> barIcon = [
-  AppIcons.share,
-  AppIcons.remix,
-  AppIcons.money,
-  AppIcons.stopCircle,
-  AppIcons.clip,
-  AppIcons.save,
-  AppIcons.flag
+  AppIcons.thumbsUp,
+  AppIcons.thumbDown,
 ];
 
 class WatchVideoScreen extends ConsumerStatefulWidget {
@@ -178,8 +167,9 @@ class WatchVideoScreenState extends ConsumerState<WatchVideoScreen> {
                                   ),
                                 ],
                               ),
+                              const SizedBox(height: 10),
                               WatchVideoSlidebar(),
-                              WatchVideoComment(),
+                              const SizedBox(height: 10),
                             ],
                           ),
                           WatchVideoReel(),

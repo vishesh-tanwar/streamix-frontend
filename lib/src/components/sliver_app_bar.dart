@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/icons.dart';
 import 'package:project/src/assets/strings.dart';
+import 'package:project/src/providers/search.dart';
+import 'package:project/src/screens/searched_video.dart';
 import 'package:project/src/utils/scale.dart';
 
-class CustomSliverAppBar extends StatelessWidget {
+class CustomSliverAppBar extends ConsumerWidget {
   final List<String> categories;
   final Function onDrawerTap;
 
@@ -14,7 +17,7 @@ class CustomSliverAppBar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SliverAppBar(
       backgroundColor: Colors.black,
       leading: Padding(
@@ -33,20 +36,13 @@ class CustomSliverAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.notifications),
-          color: Colors.white,
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Notifications icon tapped")),
-            );
-          },
-        ),
-        IconButton(
           icon: const Icon(Icons.search),
           color: Colors.white,
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Search icon tapped")),
+            ref.read(SearchProvider.notifier).searchApi('');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SearchedVideo()),
             );
           },
         ),
@@ -92,7 +88,92 @@ class CustomSliverAppBar extends StatelessWidget {
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 3),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (index == 1) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchController
+                                .text = categories[index - 1];
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchApi(categories[index - 1]);
+                            return SearchedVideo();
+                          }));
+                          return;
+                        }
+                        if (index == 1) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchController
+                                .text = categories[index - 1];
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchApi(categories[index - 1]);
+                            return SearchedVideo();
+                          }));
+                          return;
+                        }
+                        if (index == 2) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchController
+                                .text = categories[index - 1];
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchApi(categories[index - 1]);
+                            return SearchedVideo();
+                          }));
+                          return;
+                        }
+                        if (index == 3) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchController
+                                .text = categories[index - 1];
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchApi(categories[index - 1]);
+                            return SearchedVideo();
+                          }));
+                          return;
+                        }
+                        if (index == 4) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchController
+                                .text = categories[index - 1];
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchApi(categories[index - 1]);
+                            return SearchedVideo();
+                          }));
+                          return;
+                        }
+                        if (index == 5) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchController
+                                .text = categories[index - 1];
+                            ref
+                                .read(SearchProvider.notifier)
+                                .searchApi(categories[index - 1]);
+                            return SearchedVideo();
+                          }));
+                          return;
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 41, 41, 41),
                         shape: RoundedRectangleBorder(

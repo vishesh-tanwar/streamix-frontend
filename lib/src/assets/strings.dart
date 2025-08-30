@@ -18,12 +18,12 @@ class Strings {
   static const String youtubeMusic = "Youtube Music";
   static const String youtubeKids = "Youtube Kids";
 
-  static const String youtube = "Youtube";
+  static const String youtube = "Streamix";
   static const String privacyPolicyTerms = "Privacy & Policy terms ";
 
   // bottom bar
   static const String home = "Home";
-  static const String shorts = "Shorts";
+  static const String shorts = "Reels";
   static const String subscriptions = "Subscription";
   static const String you = "You";
 
@@ -118,5 +118,5 @@ class Strings {
   static const dislike = "Dislike";
   static const comment = "Comment";
 
-  static const url = "http://192.168.1.91:3000";
+  static const url = "http://192.168.1.3:3000";
 }

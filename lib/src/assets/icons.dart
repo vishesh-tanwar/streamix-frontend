@@ -22,9 +22,9 @@ class AppIcons {
   static const IconData youtubeKidsIcon = Icons.play_arrow_outlined;
 
   // Image assets
-  static const String youtubeLogoImage = "assets/images/yt2.png";
+  static const String youtubeLogoImage = "assets/images/S-logo.png";
   static const String cameleon = "assets/images/image2.jpeg";
-  static const String reelLogo = "assets/images/reel_logo.png";
+  static const String reelLogo = "assets/images/reel-logo.png";
 
   // bottom bar
   static const IconData home = Icons.home;

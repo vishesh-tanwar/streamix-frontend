@@ -18,8 +18,8 @@ import '../providers/getvideo_provider.dart';
 final GlobalKey<ScaffoldState> _homeScaffoldKey = GlobalKey<ScaffoldState>();
 
 var category = [
-  Strings.all,
   Strings.gaming,
+  "Ramen",
   Strings.music,
   Strings.flutter,
   Strings.bosses,
@@ -41,7 +41,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     Future.microtask(() {
       ref.read(getVideoProvider.notifier).fetchVideos();
       ref.read(getReelsProvider.notifier).fetchReels();
-    }); // Fetch data once
+    });
     scrollController.addListener(_onScroll);
   }
 
@@ -95,6 +95,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   4,
                                   (i) => InkWell(
                                       onTap: () {
+                                        ref
+                                            .read(historyProvider.notifier)
+                                            .sendToHistory(reelData[i]);
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(

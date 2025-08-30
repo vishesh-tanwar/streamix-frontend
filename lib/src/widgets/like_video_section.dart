@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/src/assets/strings.dart';
-import 'package:project/src/providers/get_history_provider.dart';
+import 'package:project/src/providers/get_liked_videos.dart';
 import 'package:project/src/screens/watch_video_screen.dart';
 import 'package:project/src/utils/scale.dart';
 
-class HistoryBar extends ConsumerStatefulWidget {
-  const HistoryBar({super.key});
+class LikeVideoSection extends ConsumerStatefulWidget {
+  const LikeVideoSection({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => HistoryBarState();
+  ConsumerState<ConsumerStatefulWidget> createState() => LikedVideosState();
 }
 
-class HistoryBarState extends ConsumerState {
+class LikedVideosState extends ConsumerState {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      ref.read(getHistoryProvider.notifier).fetchHistory();
+      ref.read(getLikedVideosProvider.notifier).fetchLikedVideos();
     }); // Fetch data once
   }
 
   @override
   Widget build(BuildContext context) {
-    final historyItems = ref.watch(getHistoryProvider);
+    final likedVideos = ref.watch(getLikedVideosProvider);
     return Container(
       margin: const EdgeInsets.all(12),
       child: Column(
@@ -32,13 +32,22 @@ class HistoryBarState extends ConsumerState {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                Strings.history,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 17,
-                ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.thumb_up_sharp,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: Scale.screenWidth * 0.02),
+                  const Text(
+                    "Liked Videos",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -66,16 +75,16 @@ class HistoryBarState extends ConsumerState {
             height: Scale.screenHeight * 0.17,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: historyItems.length,
+              itemCount: likedVideos.length,
               itemBuilder: (context, index) {
-                final item = historyItems[index];
+                final item = likedVideos[index];
                 return InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => WatchVideoScreen(
-                            videoId: historyItems[index].videoId),
+                            videoId: likedVideos[index].videoId),
                       ),
                     );
                   },
